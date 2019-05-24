@@ -15,7 +15,7 @@ export default {
   data () {
     return {
       sreachData: '',
-      promotionTags: ['买2免1', '领200神券', '199减100', '母婴5折抢', '充100送20']
+      promotionTags: ['鲜天麻', '剪纸', '春联', '花灯', '食用菌菇', '皮雕画']
     };
   },
   methods: {

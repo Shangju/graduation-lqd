@@ -13,8 +13,7 @@
       </div>
       <div class="item-detail-right">
         <div class="item-detail-title">
-          <p>
-            <span class="item-detail-express">校园配送</span> {{goodsInfo.title}}</p>
+          <p>{{goodsInfo.title}}</p>
         </div>
         <div class="item-detail-tag">
           <p>
@@ -42,26 +41,15 @@
               </p>
             </div>
           </div>
-          <div class="item-price-right">
-            <div class="item-remarks-sum">
-              <p>累计评价</p>
-              <p>
-                <span class="item-remarks-num">{{goodsInfo.remarksNum}} 条</span>
-              </p>
-            </div>
-          </div>
         </div>
-        <!-- 选择颜色 -->
+        <!-- 选择规格 -->
         <div class="item-select">
           <div class="item-select-title">
-            <p>选择颜色</p>
+            <p>选择规格</p>
           </div>
           <div class="item-select-column">
             <div class="item-select-row" v-for="(items, index) in goodsInfo.setMeal" :key="index">
               <div class="item-select-box" v-for="(item, index1) in items" :key="index1" @click="select(index, index1)" :class="{'item-select-box-active': ((index * 3) + index1) === selectBoxIndex}">
-                <div class="item-select-img">
-                  <img :src="item.img" alt="">
-                </div>
                 <div class="item-select-intro">
                   <p>{{item.intro}}</p>
                 </div>
@@ -69,17 +57,13 @@
             </div>
           </div>
         </div>
-        <!-- 白条分期 -->
+        <!-- 库存 -->
         <div class="item-select">
           <div class="item-select-title">
-            <p>白条分期</p>
+            <p>库存</p>
           </div>
-          <div class="item-select-row">
-            <div class="item-select-class" v-for="(item,index) in hirePurchase" :key="index">
-              <Tooltip :content="item.tooltip" placement="top-start">
-                <span>{{item.type}}</span>
-              </Tooltip>
-            </div>
+          <div class="item-reserve">
+              <span>500</span>
           </div>
         </div>
         <br>
@@ -108,35 +92,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['goodsInfo']),
-    hirePurchase () {
-      const three = this.price * this.count / 3;
-      const sex = this.price * this.count / 6;
-      const twelve = this.price * this.count / 12 * 1.0025;
-      const twentyFour = this.price * this.count / 24 * 1.005;
-      return [
-        {
-          tooltip: '无手续费',
-          type: '不分期'
-        },
-        {
-          tooltip: '无手续费',
-          type: `￥${three.toFixed(2)} x 3期`
-        },
-        {
-          tooltip: '无手续费',
-          type: `￥${sex.toFixed(2)} x 6期`
-        },
-        {
-          tooltip: '含手续费：费率0.25%起，￥0.1起×12期',
-          type: `￥${twelve.toFixed(2)} x 12期`
-        },
-        {
-          tooltip: '含手续费：费率0.5%起，￥0.1起×12期',
-          type: `￥${twentyFour.toFixed(2)} x 24期`
-        }
-      ];
-    }
+    ...mapState(['goodsInfo'])
   },
   methods: {
     ...mapActions(['addShoppingCart']),
@@ -325,7 +281,7 @@ export default {
   margin: 0px;
   padding: 5px;
 }
-.item-select-class {
+.item-select-class, .item-reserve {
   padding: 5px;
   margin-right: 8px;
   background-color: #f7f7f7;

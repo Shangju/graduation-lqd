@@ -1,14 +1,12 @@
 <template>
   <div>
     <Sreach></Sreach>
-    <ShopHeader></ShopHeader>
-    <GoodsDetailNav></GoodsDetailNav>
     <div class="shop-item-path">
       <div class="shop-nav-container">
         <Breadcrumb>
-          <BreadcrumbItem to="/">首页</BreadcrumbItem>
-          <BreadcrumbItem to="/goodsList">手机壳</BreadcrumbItem>
-          <BreadcrumbItem>手机保护套</BreadcrumbItem>
+          <BreadcrumbItem to="/" :style="{color:'white'}">首页</BreadcrumbItem>
+          <!-- <BreadcrumbItem to="/goodsList">手机壳</BreadcrumbItem> -->
+          <BreadcrumbItem>商品详情</BreadcrumbItem>
         </Breadcrumb>
       </div>
     </div>
@@ -65,12 +63,22 @@ export default {
 <style scoped>
 .shop-item-path {
   height: 38px;
-  background-color: rgb(236, 235, 235);
+  background-color: #333333;
   line-height: 38px;
   color: #2c2c2c;
 }
 .shop-nav-container {
   margin: 0px auto;
   width: 80%;
+}
+.ivu-breadcrumb a {
+    color: white !important;
+}
+.ivu-breadcrumb-item-link {
+    color: white;
+}
+.ivu-breadcrumb>span:last-child {
+    font-weight: 400;
+    color: white;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Sreach></Sreach>
-    <GoodsListNav></GoodsListNav>
+    <div class="header-line"></div>
     <div class="goods-list-container">
       <Alert show-icon class="tips-box">
         小提示
@@ -57,7 +57,6 @@
 
 <script>
 import Sreach from '@/components/Sreach';
-import GoodsListNav from '@/components/nav/GoodsListNav';
 import Footer from '@/components/footer/Footer';
 import store from '@/vuex/store';
 import { mapState, mapActions } from 'vuex';
@@ -158,7 +157,6 @@ export default {
   },
   components: {
     Sreach,
-    GoodsListNav,
     Footer
   },
   store
@@ -166,6 +164,10 @@ export default {
 </script>
 
 <style scoped>
+.header-line {
+  background-color: #333333;
+  height: 35px;
+}
 .goods-list-container {
   margin: 15px auto;
   width: 80%;

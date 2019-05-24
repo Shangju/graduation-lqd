@@ -9,7 +9,7 @@
 
 <script>
 import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 export default {
   name: 'MyShoppingCart',
   data () {
@@ -62,13 +62,13 @@ export default {
     };
   },
   created () {
-    this.loadShoppingCart();
+    // this.loadShoppingCart();
   },
   computed: {
     ...mapState(['shoppingCart'])
   },
   methods: {
-    ...mapActions(['loadShoppingCart']),
+    // ...mapActions(['loadShoppingCart']),
     goTo () {
       this.$router.push('/order');
     }

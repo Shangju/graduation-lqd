@@ -1,3 +1,5 @@
+// import { stat } from "fs";
+
 // 设置注册步骤
 export const SET_SIGN_UP_SETP = (state, step) => {
   state.signUpStep = step;
@@ -25,14 +27,34 @@ export const SET_CAROUSELITEMS_INFO = (state, { carouselItems, activity }) => {
   state.marketing.activity = activity;
 };
 
-// 设置电脑专栏数据
+// 设置1F栏数据
 export const SET_COMPUTER_INFO = (state, computer) => {
   state.computer = computer;
 };
 
-// 设置爱吃专栏数据
+// 设置2F专栏数据
 export const SET_EAT_INFO = (state, eat) => {
   state.eat = eat;
+};
+
+// 设置3F专栏数据
+export const SET_THIRD_INFO = (state, third) => {
+  state.third = third;
+};
+
+// 设置4F专栏数据
+export const SET_FOURTH_INFO = (state, fourth) => {
+  state.fourth = fourth;
+};
+
+// 设置5F专栏数据
+export const SET_FIFTH_INFO = (state, fifth) => {
+  state.fifth = fifth;
+};
+
+// 设置6F专栏数据
+export const SET_SIXTH_INFO = (state, sixth) => {
+  state.sixth = sixth;
 };
 
 // 减少秒杀时间

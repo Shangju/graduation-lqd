@@ -1,30 +1,17 @@
 <template>
   <div class="box">
     <div class="nav">
-      <ul class="location">
-        <li>
-          <Dropdown  placement="bottom-start">
-            <a href="javascript:void(0)">
-              <Icon type="ios-location" class="icon"></Icon> {{city}}
-            </a>
-            <DropdownMenu slot="list">
-              <div class="city">
-                <p v-for="(items, index) in cityArr" :key="index">
-                  <span v-for="(item, index) in items"  class="city-item" :key="index" @click="changeCity(item)">{{item}}</span>
-                </p>
-              </div>
-            </DropdownMenu>
-          </Dropdown>
-        </li>
-      </ul>
+      <div class="location">
+        <p class="title">中国精准扶贫特产网</p>
+    </div>
       <ul class="detail">
-        <li class="first" v-show="!userInfo.username">
-          你好，请<router-link to="/login">登录 <Icon type="person"></Icon></router-link> |<span class="text-color-red"><router-link to="/SignUp">免费注册 <Icon type="person-add"></Icon></router-link></span>
+        <li class="first" v-show="!userInfo.adminName">
+          <router-link to="/login">你好，请登录 <Icon type="person"></Icon></router-link> |<span class="text-color-red"><router-link to="/SignUp">免费注册 <Icon type="person-add"></Icon></router-link></span>
         </li>
-        <li v-show="!!userInfo.username">
+        <li v-show="!!userInfo.adminName">
           <Dropdown>
             <p class="username-p">
-              <Avatar class="person-icon" icon="person" size="small" /> <span class="username">{{userInfo.username}} </span>
+              <Avatar class="person-icon" icon="person" size="small" /> <span class="username">{{userInfo.adminName}} </span>
             </p>
             <DropdownMenu slot="list">
                 <div class="my-page">
@@ -87,9 +74,10 @@
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li><router-link to="/">网站导航</router-link></li>
-        <li><router-link to="/freeback">意见反馈</router-link></li>
         <li><router-link to="/">商城首页</router-link></li>
+        <li><router-link to="/joinSupplier">供应商</router-link></li>
+        <li><router-link to="/joinInvestor">投资者加盟</router-link></li>
+        <li><router-link to="/freeback">意见反馈</router-link></li>
       </ul>
     </div>
   </div>
@@ -150,6 +138,11 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+.title {
+    font-size: 20px;
+    color: #de1414;
+    font-weight: bold;
+}
 .nav ul {
   list-style: none;
 }
@@ -175,6 +168,9 @@ export default {
 }
 .location {
   color: #999999;
+  display:flex;
+  align-items:center;
+  justify-content: center;
 }
 .icon {
   color: #d9534f;

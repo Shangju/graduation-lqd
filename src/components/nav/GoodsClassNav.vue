@@ -1,9 +1,6 @@
 /*
- * @Author: Gavin
- * @Date: 2018-06-11 11:27:10
- * @Last Modified by: Gavin
- * @Last Modified time: 2018-06-11 12:23:40
- * @Describe: 搜索商品导航标签
+ * @Author: Judy
+ * @Date: 2019-4-7 15:41
  */
 <template>
   <div class="item-class-show">

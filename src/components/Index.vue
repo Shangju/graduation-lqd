@@ -4,7 +4,20 @@
     <HomeNav></HomeNav>
     <!-- 商品显示区域 -->
     <div class="content">
-      <!-- 秒杀 -->
+      <!-- 加盟 -->
+      <div class="join">
+        <router-link to="/joinSupplier">
+          <div class="join-left join-common">
+            <span>立即申请加盟供应商</span>
+          </div>
+        </router-link>
+        <router-link to="/joinInvestor">
+          <div class="join-right join-common">
+            <span>立即申请加盟投资者</span>
+          </div>
+        </router-link>
+      </div>
+      <!-- 隆重推荐 -->
       <div class="seckill">
         <!-- 头部 -->
         <div class="seckill-head">
@@ -12,8 +25,8 @@
             <img src="static/img/index/clock.png">
           </div>
           <div class="seckill-text">
-            <span class="seckill-title">限时秒杀</span>
-            <span class="seckill-remarks">总有你想不到的低价</span>
+            <span class="seckill-title">隆重推荐</span>
+            <!-- <span class="seckill-remarks">总有你想不到的低价</span> -->
           </div>
           <div class="count-down">
             <span class="count-down-text">当前场次</span>
@@ -25,11 +38,11 @@
             <span class="count-down-text">后结束抢购</span>
           </div>
         </div>
-        <!-- 内容 -->
+        <!-- 推荐内容 -->
         <div class="seckill-content">
           <div class="seckill-item" v-for="(item, index) in seckills.goodsList" :key="index">
             <div class="seckill-item-img">
-              <router-link to="/goodsList"><img :src="item.img"></router-link>
+              <router-link to="/goodsDetail"><img :src="item.img"></router-link>
             </div>
             <div class="seckill-item-info">
               <p>{{item.intro}}</p>
@@ -41,53 +54,46 @@
           </div>
         </div>
       </div>
-      <!-- 电脑专场 -->
+      <!-- 1F新疆特色扶贫馆 -->
       <div class="item-class">
         <div class="item-class-head">
           <span class="item-class-title">{{computer.title}}</span>
           <ul>
             <li v-for="(item, index) in computer.link" :key="index">
-              <router-link to="/goodsList">{{item}}</router-link>
+              <router-link to="/goodsDetail">{{item}}</router-link>
             </li>
           </ul>
         </div>
         <div class="item-class-content" v-for="(item, index) in computer.detail" :key="index">
           <div class="item-content-top">
             <div class="item-big-img">
-              <router-link to="/goodsList">
+              <router-link to="/goodsDetail">
                 <img :src="item.bigImg" alt="">
               </router-link>
             </div>
             <div class="item-four-img">
               <div class="item-four-detail" v-for="(subItem, index) in item.itemFour" :key="index">
-                <div class="item-four-detail-text">
-                  <p class="pt_bi_tit">{{subItem.title}}</p>
-                  <p class="pt_bi_promo">{{subItem.intro}}</p>
-                </div>
                 <div class="item-four-detail-img">
-                  <router-link to="/goodsList">
+                  <router-link to="/goodsDetail">
                     <img :src="subItem.img" alt="">
                   </router-link>
                 </div>
+                <div class="item-four-detail-text">
+                    <p class="pt_bi_tit">{{subItem.title}}</p>
+                    <p class="pt_bi_promo">{{subItem.intro}}</p>
+                  </div>
               </div>
-            </div>
-          </div>
-          <div class="item-content-bottom">
-            <div class="item-content-bottom-img" v-for="(subImg, index) in item.itemContent" :key="index">
-              <router-link to="/goodsList">
-                <img :src="subImg">
-              </router-link>
             </div>
           </div>
         </div>
       </div>
-      <!-- 爱吃专场 -->
-      <div class="item-class">
+      <!-- 2F西藏特色扶贫馆 -->
+      <!-- <div class="item-class">
         <div class="item-class-head item-class-eat-head">
           <span class="item-class-title">{{eat.title}}</span>
           <ul>
             <li v-for="(item, index) in eat.link" :key="index">
-              <router-link to="/goodsList">{{item}}</router-link>
+              <router-link to="/goodsDetail">{{item}}</router-link>
             </li>
           </ul>
         </div>
@@ -98,27 +104,134 @@
             </div>
             <div class="item-four-img">
               <div class="item-four-detail" v-for="(subItem, index) in item.itemFour" :key="index">
+                <div class="item-four-detail-img">
+                  <router-link to="/goodsDetail">
+                    <img :src="subItem.img" alt="">
+                  </router-link>
+                </div>
                 <div class="item-four-detail-text">
                   <p class="pt_bi_tit pt_bi_tit-eat">{{subItem.title}}</p>
                   <p class="pt_bi_promo">{{subItem.intro}}</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- 3F湖南特色扶贫馆 -->
+      <!-- <div class="item-class">
+        <div class="item-class-head item-class-eat-head">
+          <span class="item-class-title">{{third.title}}</span>
+        </div>
+        <div class="item-class-content" v-for="(item, index) in third.detail" :key="index">
+          <div class="item-content-top">
+            <div class="item-big-img">
+              <img :src="item.bigImg" alt="">
+            </div>
+            <div class="item-four-img">
+              <div class="item-four-detail" v-for="(subItem, index) in item.itemFour" :key="index">
                 <div class="item-four-detail-img">
-                  <router-link to="/goodsList">
+                  <router-link to="/goodsDetail">
                     <img :src="subItem.img" alt="">
                   </router-link>
+                </div>
+                <div class="item-four-detail-text">
+                  <p class="pt_bi_tit pt_bi_tit-eat">{{subItem.title}}</p>
+                  <p class="pt_bi_promo">{{subItem.intro}}</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="item-content-bottom">
-            <div class="item-content-bottom-img" v-for="(subImg, index) in item.itemContent" :key="index">
-              <router-link to="/goodsList">
-                <img :src="subImg">
-              </router-link>
+        </div>
+      </div> -->
+      <!-- 4F江西特色扶贫馆 -->
+      <!-- <div class="item-class">
+        <div class="item-class-head item-class-eat-head">
+          <span class="item-class-title">{{fourth.title}}</span>
+        </div>
+        <div class="item-class-content" v-for="(item, index) in fourth.detail" :key="index">
+          <div class="item-content-top">
+            <div class="item-big-img">
+              <img :src="item.bigImg" alt="">
+            </div>
+            <div class="item-four-img">
+              <div class="item-four-detail" v-for="(subItem, index) in item.itemFour" :key="index">
+                <div class="item-four-detail-img">
+                  <router-link to="/goodsDetail">
+                    <img :src="subItem.img" alt="">
+                  </router-link>
+                </div>
+                <div class="item-four-detail-text">
+                  <p class="pt_bi_tit pt_bi_tit-eat">{{subItem.title}}</p>
+                  <p class="pt_bi_promo">{{subItem.intro}}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
+      <!-- 5F陕西特色扶贫馆 -->
+      <!-- <div class="item-class">
+        <div class="item-class-head item-class-eat-head">
+          <span class="item-class-title">{{fifth.title}}</span>
+          <ul>
+            <li v-for="(item, index) in eat.link" :key="index">
+              <router-link to="/goodsDetail">{{item}}</router-link>
+            </li>
+          </ul>
+        </div>
+        <div class="item-class-content" v-for="(item, index) in fifth.detail" :key="index">
+          <div class="item-content-top">
+            <div class="item-big-img">
+              <img :src="item.bigImg" alt="">
+            </div>
+            <div class="item-four-img">
+              <div class="item-four-detail" v-for="(subItem, index) in item.itemFour" :key="index">
+                <div class="item-four-detail-img">
+                  <router-link to="/goodsDetail">
+                    <img :src="subItem.img" alt="">
+                  </router-link>
+                </div>
+                <div class="item-four-detail-text">
+                  <p class="pt_bi_tit pt_bi_tit-eat">{{subItem.title}}</p>
+                  <p class="pt_bi_promo">{{subItem.intro}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- 6F湖北特色扶贫馆 -->
+      <!-- <div class="item-class">
+        <div class="item-class-head item-class-eat-head">
+          <span class="item-class-title">{{sixth.title}}</span>
+          <ul>
+            <li v-for="(item, index) in eat.link" :key="index">
+              <router-link to="/goodsDetail">{{item}}</router-link>
+            </li>
+          </ul>
+        </div>
+        <div class="item-class-content" v-for="(item, index) in sixth.detail" :key="index">
+          <div class="item-content-top">
+            <div class="item-big-img">
+              <img :src="item.bigImg" alt="">
+            </div>
+            <div class="item-four-img">
+              <div class="item-four-detail" v-for="(subItem, index) in item.itemFour" :key="index">
+                <div class="item-four-detail-img">
+                  <router-link to="/goodsDetail">
+                    <img :src="subItem.img" alt="">
+                  </router-link>
+                </div>
+                <div class="item-four-detail-text">
+                  <p class="pt_bi_tit pt_bi_tit-eat">{{subItem.title}}</p>
+                  <p class="pt_bi_promo">{{subItem.intro}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
     <Footer></Footer>
   </div>
@@ -129,15 +242,21 @@ import Sreach from '@/components/Sreach';
 import HomeNav from '@/components/nav/HomeNav';
 import Footer from '@/components/footer/Footer';
 import store from '@/vuex/store';
+import JoinSupplier from '@/components/JoinSupplier';
+import joinInvestor from '@/components/JoinInvestor';
 import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
   name: 'Index',
   created () {
     this.loadSeckillsInfo();
     this.loadCarouselItems();
-    this.loadComputer();
-    this.loadEat();
-    this.loadShoppingCart();
+    this.loadFirstFloor();
+    this.loadSecondFloor();
+    this.loadThirdFloor();
+    this.loadFourthFloor();
+    this.loadFifthFloor();
+    this.loadSixthFloor();
+    // this.loadShoppingCart();
   },
   mounted () {
     const father = this;
@@ -151,17 +270,19 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['loadSeckillsInfo', 'loadCarouselItems', 'loadComputer', 'loadEat', 'loadShoppingCart']),
+    ...mapActions([ 'loadSeckillsInfo', 'loadCarouselItems', 'loadFirstFloor', 'loadSecondFloor', 'loadThirdFloor', 'loadFourthFloor', 'loadFifthFloor', 'loadSixthFloor' ]),
     ...mapMutations(['REDUCE_SECKILLS_TIME'])
   },
   computed: {
-    ...mapState([ 'seckills', 'computer', 'eat' ]),
+    ...mapState([ 'seckills', 'computer', 'eat', 'third', 'fourth', 'fifth', 'sixth' ]),
     ...mapGetters([ 'seckillsHours', 'seckillsMinutes', 'seckillsSeconds' ])
   },
   components: {
     Sreach,
     HomeNav,
-    Footer
+    Footer,
+    JoinSupplier,
+    joinInvestor
   },
   destroyed () {
     clearInterval(this.setIntervalObj);
@@ -175,8 +296,37 @@ export default {
   background-color: #F6F6F6;
 }
 .content {
-  width: 1008px;
+  width: 1020px;
   margin: 0px auto;
+}
+/* 加盟专栏 */
+.join {
+  margin-top: 20px;
+  height: 130px;
+}
+.join-left {
+  float: left;
+  background: -webkit-linear-gradient(left, #d47585 , rgb(217, 220, 46)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #d47585, rgb(217, 220, 46)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #d47585, rgb(217, 220, 46)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #d47585 , rgb(217, 220, 46)); /* 标准的语法（必须放在最后） */
+}
+.join-right {
+  float: right;
+  background: -webkit-linear-gradient(left, #d69047 , rgb(224, 221, 120)); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #d69047, rgb(224, 221, 120)); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #d69047, rgb(224, 221, 120)); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #d69047 , rgb(224, 221, 120)); /* 标准的语法（必须放在最后） */
+}
+.join-common {
+  cursor: pointer;
+  width: 48%;
+  height: 130px;
+  line-height: 130px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
 }
 /*****************************秒杀专栏开始*****************************/
 /*秒杀专栏*/
@@ -261,7 +411,7 @@ export default {
   height: 280px;
 }
 .seckill-item {
-  width: 183px;
+  width: 240px;
   height: 250px;
   margin-top: 15px;
   margin-left: 15px;
@@ -270,7 +420,7 @@ export default {
   float: left;
 }
 .seckill-item-img {
-  width: 160px;
+  width: 240px;
   height: 160px;
   margin: 0px auto;
   overflow: hidden;
@@ -278,8 +428,8 @@ export default {
   background-color: #fff;
 }
 .seckill-item-img img {
-  width: 130px;
-  height: 130px;
+  width: 210px;
+  height: 135px;
   margin-left: 15px;
   margin-top: 15px;
   transition: margin-top 0.3s;
@@ -308,7 +458,7 @@ export default {
 /*****************************商品专栏开始*****************************/
 .item-class {
   width: 100%;
-  height: 470px;
+  height: 515px;
   margin-top: 15px;
   background-color: #fff;
 }
@@ -318,7 +468,7 @@ export default {
   background-color: #4488a7;
 }
 .item-class-eat-head {
-  background-color: #ecb226;
+  background-color: #53cfda;
 }
 .item-class-head ul {
   list-style: none;
@@ -352,11 +502,9 @@ export default {
   margin-left: 15px;
 }
 .item-class-content {
-  width: 49%;
+  width: 99%;
   cursor: pointer;
-  border-right: 1px solid #ccc;
   margin-left: 0.9%;
-  /*background-color: #cff;*/
   float: left;
 }
 .item-class-content:nth-child(odd) {
@@ -364,11 +512,11 @@ export default {
 }
 .item-content-top {
   width: 100%;
-  height: 260px;
+  height: 465px;
 }
 .item-big-img {
-  width: 180px;
-  height: 260px;
+  width: 363px;
+  height: 465px;
   overflow: hidden;
   float: left;
 }
@@ -381,8 +529,7 @@ export default {
   transition: margin-left 0.3s;
 }
 .item-four-img {
-  width: 303px;
-  margin-left: 8px;
+  width: 646px;
   float: left;
 }
 .item-four-detail img {
@@ -394,34 +541,32 @@ export default {
   transition: margin-left 0.3s;
 }
 .item-four-detail {
-  width: 152px;
-  height: 130px;
+  width: 216px;
+  height: 233px;
   margin-left: -1px;
   float: left;
 }
-.item-four-detail:first-child {
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-}
-.item-four-detail:last-child {
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
+.item-four-detail {
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
 .item-four-detail-text {
-  width: 50px;
-  margin-left: 5px;
-  margin-top: 15px;
+  width: 213px;
+  height: 40px;
+  text-align: center;
   float: left;
 }
 .item-four-detail-img {
-  width: 96px;
+  width: 196px;
   margin-top: 15px;
+  margin-left: 20px;
   overflow: hidden;
   float: left;
 }
 .item-four-detail-img img {
   margin-left: 5px;
-  width: 90px;
+  width: 165px;
 }
 .pt_bi_tit {
   font-weight: bold;
@@ -432,6 +577,9 @@ export default {
   color: #ecb127;
 }
 .pt_bi_promo {
+  font-size: 16px;
+  margin-top: -10px;
+  font-weight: bold;
   color: #00695c;
 }
 .item-content-bottom {

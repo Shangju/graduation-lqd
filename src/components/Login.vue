@@ -22,8 +22,15 @@
                       <Icon type="ios-locked-outline" slot="prepend"> </Icon>
                   </i-input>
               </FormItem>
+              <FormItem prop="vali">
+                <i-input type="text" v-model="formDate.vali" clearable size="large" placeholder="验证码" style="width: 150px">
+                </i-input>
+                <img style="width: 150px;" :src="formDate.imgSrc" @click="refreshCaptcha">
+              </FormItem>
+
               <FormItem>
-                  <Button type="error" size="large" @click="handleSubmit('formInline')" long>登陆</Button>
+                  <Button type="error" size="large" @click="handleSubmit()" long>登陆</Button>
+                  <!--<Button type="error" size="large" @click="test1()" long>测试</Button>-->
               </FormItem>
           </Form>
           </div>
@@ -44,7 +51,9 @@ export default {
     return {
       formDate: {
         username: '',
-        password: ''
+        password: '',
+        vali: '',
+        imgSrc: 'http://localhost:8088/captcha.jpg'
       },
       ruleInline: {
         username: [
@@ -58,11 +67,25 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['SET_USER_LOGIN_INFO']),
-    ...mapActions(['login']),
-    handleSubmit (name) {
-      const father = this;
-      console.log(this.formDate.username);
+    handleSubmit () {
+      let userInfo = {adminName:this.formDate.username, userPassword:this.formDate.password,captcha:this.formDate.vali}
+      // let self = this; // 定义一个变量指向vue实例
+      this.$axios.post('http://localhost:8088/sys/login',userInfo).then(function (res) {
+        if(res.data.msg != null){
+          alert(res.data.msg);
+        }else {
+          // alert(res.data.data.token);
+          // 放置token到Cookie,保存7天
+          // Cookies.set('token', res.data.data.token,{expires: 7});
+          // 保存用户到本地会话
+          localStorage.setItem('loginInfo', JSON.stringify(userInfo));
+          // 登录成功，跳转到主页
+          // localStorage.setItem('loginInfo', JSON.stringify(userInfo));
+          window.location.href = "/";
+        }
+      }).catch(function (res) {
+        alert(res);
+      });
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.login(father.formDate).then(result => {
@@ -77,6 +100,9 @@ export default {
           this.$Message.error('请填写正确的用户名或密码');
         }
       });
+    },
+    refreshCaptcha: function() {
+      this.formDate.imgSrc =  "http://localhost:8088/captcha.jpg?t=" + new Date().getTime();
     }
   },
   components: {

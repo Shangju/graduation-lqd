@@ -19,6 +19,8 @@ const AddAddress = resolve => require(['@/components/home/AddAddress'], resolve)
 const MyOrder = resolve => require(['@/components/home/MyOrder'], resolve);
 const MyShoppingCart = resolve => require(['@/components/home/MyShoppingCart'], resolve);
 const Merchant = resolve => require(['@/components/Merchant'], resolve);
+const JoinSupplier = resolve => require(['@/components/JoinSupplier'], resolve);
+const JoinInvestor = resolve => require(['@/components/JoinInvestor'], resolve);
 
 Vue.use(Router);
 
@@ -28,6 +30,16 @@ export default new Router({
       path: '/', // 首页
       name: 'Index',
       component: Index
+    },
+    {
+      path: '/joinSupplier', // 供应商
+      name: 'joinSupplier',
+      component: JoinSupplier
+    },
+    {
+      path: '/joinInvestor', // 投资商
+      name: 'joinInvestor',
+      component: JoinInvestor
     },
     {
       path: '/Login', // 登陆
@@ -42,7 +54,7 @@ export default new Router({
         {
           path: '/',
           name: 'index',
-          component: CheckPhone
+          component: InputInfo
         },
         {
           path: 'checkPhone',
@@ -62,7 +74,7 @@ export default new Router({
       ]
     },
     {
-      path: '/goodsList', // 商品列表
+      path: '/z', // 商品列表
       name: 'GoodsList',
       component: GoodsList
     },

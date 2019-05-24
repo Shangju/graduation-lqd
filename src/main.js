@@ -5,9 +5,17 @@ import App from './App';
 import router from './router';
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
+import axios from 'axios';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
 
 Vue.use(iView);
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
+Vue.prototype.$axios = axios;
+
+axios.defaults.withCredentials = true;
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();

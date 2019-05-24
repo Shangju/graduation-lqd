@@ -16,23 +16,24 @@ export default {
         order_id: 1529931938150,
         goods_id: 1529931938150,
         count: 1,
-        img: 'static/img/goodsDetail/pack/1.jpg',
-        package: '4.7英寸-深邃蓝',
-        price: 28,
-        title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳',
+        img: 'static/img/goodsDetail/itemDetailOne/1.jpg',
+        package: '250g*2',
+        price: 54,
+        title: '【西藏扶贫商品】藜麦',
         createAt: '2018-06-06 20:06:08'
       }],
       columns: [
         {
           title: '订单号',
           key: 'order_id',
-          width: 180,
+          width: 150,
           align: 'center'
         },
         {
           title: '图片',
           key: 'img',
-          width: 86,
+          width: 120,
+          height: 120,
           render: (h, params) => {
             return h('div', [
               h('img', {
@@ -45,13 +46,14 @@ export default {
           align: 'center'
         },
         {
-          title: '标题',
+          title: '商品名称',
           key: 'title',
+          width: 215,
           align: 'center'
         },
         {
-          title: '套餐',
-          width: 198,
+          title: '商品规格',
+          width: 100,
           key: 'package',
           align: 'center'
         },
@@ -69,7 +71,7 @@ export default {
         },
         {
           title: '购买时间',
-          width: 120,
+          width: 200,
           key: 'createAt',
           align: 'center'
         }
@@ -85,5 +87,12 @@ export default {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+.ivu-table-column-center img {
+  height: 100px;
+}
+.ivu-table-cell {
+  padding-right: 0px;
+  padding-left: 0px;
 }
 </style>

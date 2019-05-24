@@ -1,7 +1,6 @@
 <template>
   <div>
     <Sreach></Sreach>
-    <GoodsListNav></GoodsListNav>
     <div class="container">
       <div class="bread-crumb">
         <Breadcrumb>
@@ -81,7 +80,6 @@
 
 <script>
 import Sreach from '@/components/Sreach';
-import GoodsListNav from '@/components/nav/GoodsListNav';
 import GoodsClassNav from '@/components/nav/GoodsClassNav';
 import Footer from '@/components/footer/Footer';
 import store from '@/vuex/store';
@@ -128,7 +126,6 @@ export default {
   },
   components: {
     Sreach,
-    GoodsListNav,
     GoodsClassNav,
     Footer
   },

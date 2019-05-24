@@ -3,34 +3,28 @@ export const loadSeckillsInfo = ({ commit }) => {
   return new Promise((resolve, reject) => {
     const data = [
       {
-        intro: '【赠小风扇】维他 柠檬茶250ml*32盒 礼品装 整箱',
+        intro: '【西藏扶贫商品】净土 一抔藜麦',
         img: 'static/img/index/seckill/seckill-item1.jpg',
-        price: 71.9,
-        realPrice: 89.6
+        price: 54.0,
+        realPrice: 68.0
       },
       {
-        intro: 'Kindle Paperwhite 全新升级版6英寸护眼非反光电子墨水',
+        intro: '【西藏扶贫商品】净土 耗牛叔叔 耗牛肉干',
         img: 'static/img/index/seckill/seckill-item2.jpg',
-        price: 989.0,
-        realPrice: 1299.0
+        price: 58.0,
+        realPrice: 58.0
       },
       {
-        intro: '粮悦 大吃兄糯米锅巴 安徽特产锅巴糯米原味400g*2盒',
+        intro: '【中国民用航空局扶贫产品】和田县红枣500g*3包',
         img: 'static/img/index/seckill/seckill-item3.jpg',
-        price: 21.8,
-        realPrice: 49.0
+        price: 48.0,
+        realPrice: 68.0
       },
       {
-        intro: '【京东超市】清风（APP）抽纸 原木纯品金装系列 3层',
+        intro: '【深度贫困地区重点扶贫商品】新疆叶城县琥珀核桃仁丨多道严选甜脆不腻',
         img: 'static/img/index/seckill/seckill-item4.jpg',
-        price: 49.9,
-        realPrice: 59.0
-      },
-      {
-        intro: 'NIKE耐克 男子休闲鞋 AIR MAX 90 ESSENTIAL 气垫',
-        img: 'static/img/index/seckill/seckill-item5.jpg',
-        price: 559.9,
-        realPrice: 759.9
+        price: 60.0,
+        realPrice: 69.0
       }
     ];
     const date = new Date();
@@ -68,71 +62,39 @@ export const loadCarouselItems = ({ commit }) => {
   });
 };
 
-// 加载电脑专栏数据
-export const loadComputer = ({ commit }) => {
+// 加载1F新疆特色扶贫馆专栏数据
+export const loadFirstFloor = ({ commit }) => {
   return new Promise((resolve, reject) => {
     const computer = {
-      title: '电脑数码',
-      link: [ '电脑馆', '游戏极品', '装机大师', '职场焕新', '女神频道', '虚拟现实', '二合一平板', '电子教育', '万物周刊' ],
+      title: '1F 新疆特色扶贫馆',
       detail: [
         {
           bigImg: 'static/img/index/computer/item-computer-1.jpg',
           itemFour: [
             {
-              title: '电脑馆',
-              intro: '笔记本999元限量秒！',
+              intro: '￥125',
               img: 'static/img/index/computer/item-computer-2.jpg'
             },
             {
-              title: '外设装备',
-              intro: '1000减618',
+              intro: '￥45',
               img: 'static/img/index/computer/item-computer-1-3.jpg'
             },
             {
-              title: '电脑配件',
-              intro: '联合满减最高省618',
+              intro: '￥125',
               img: 'static/img/index/computer/item-computer-1-4.jpg'
             },
             {
-              title: '办公生活',
-              intro: '5折神券 精品文具',
+              intro: '￥48',
               img: 'static/img/index/computer/item-computer-1-5.jpg'
+            },
+            {
+              intro: '￥38',
+              img: 'static/img/index/computer/item-computer-1-6.jpg'
+            },
+            {
+              intro: '￥49',
+              img: 'static/img/index/computer/item-computer-1-7.jpg'
             }
-          ],
-          itemContent: [
-            'static/img/index/computer/item-computer-1-6.jpg',
-            'static/img/index/computer/item-computer-1-7.jpg',
-            'static/img/index/computer/item-computer-1-8.jpg'
-          ]
-        },
-        {
-          bigImg: 'static/img/index/computer/item-computer-2-1.jpg',
-          itemFour: [
-            {
-              title: '平板电脑',
-              intro: '爆款平板12期免息',
-              img: 'static/img/index/computer/item-computer-2-2.jpg'
-            },
-            {
-              title: '智能酷玩',
-              intro: '抢999减666神券',
-              img: 'static/img/index/computer/item-computer-2-3.jpg'
-            },
-            {
-              title: '娱乐影音',
-              intro: '大牌耳机低至5折',
-              img: 'static/img/index/computer/item-computer-2-4.jpg'
-            },
-            {
-              title: '摄影摄像',
-              intro: '大牌相机5折抢',
-              img: 'static/img/index/computer/item-computer-2-5.jpg'
-            }
-          ],
-          itemContent: [
-            'static/img/index/computer/item-computer-2-6.jpg',
-            'static/img/index/computer/item-computer-2-7.jpg',
-            'static/img/index/computer/item-computer-2-8.jpg'
           ]
         }
       ]
@@ -141,76 +103,208 @@ export const loadComputer = ({ commit }) => {
   });
 };
 
-// 加载爱吃专栏数据
-export const loadEat = ({ commit }) => {
+// 加载2F西藏特色扶贫馆专栏数据
+export const loadSecondFloor = ({ commit }) => {
   return new Promise((resolve, reject) => {
     const eat = {
-      title: '爱吃',
-      link: [ '休闲零食', '坚果', '牛奶', '饮料冲调', '食用油', '大米', '白酒', '红酒', '烧烤食材', '牛排', '樱桃' ],
+      title: '2F西藏特色扶贫馆',
       detail: [
         {
           bigImg: 'static/img/index/eat/item-eat-1-1.jpg',
           itemFour: [
             {
-              title: '粮油调味',
-              intro: '买2免1',
+              intro: '￥58',
               img: 'static/img/index/eat/item-eat-1-2.jpg'
             },
             {
-              title: '饮料冲调',
-              intro: '第二件半价',
+              intro: '￥38',
               img: 'static/img/index/eat/item-eat-1-3.jpg'
             },
             {
-              title: '休闲零食',
-              intro: '满99减40',
+              intro: '￥86',
               img: 'static/img/index/eat/item-eat-1-4.jpg'
             },
             {
-              title: '中外名酒',
-              intro: '满199减100',
+              intro: '￥28.5',
               img: 'static/img/index/eat/item-eat-1-5.jpg'
+            },
+            {
+              intro: '￥3.8',
+              img: 'static/img/index/eat/item-eat-1-6.jpg'
+            },
+            {
+              intro: '￥58',
+              img: 'static/img/index/eat/item-eat-1-7.jpg'
             }
-          ],
-          itemContent: [
-            'static/img/index/eat/item-eat-1-6.jpg',
-            'static/img/index/eat/item-eat-1-7.jpg',
-            'static/img/index/eat/item-eat-1-8.jpg'
-          ]
-        },
-        {
-          bigImg: 'static/img/index/eat/item-eat-2-1.jpg',
-          itemFour: [
-            {
-              title: '东家菜',
-              intro: '丰富好味',
-              img: 'static/img/index/eat/item-eat-2-2.jpg'
-            },
-            {
-              title: '东家菜',
-              intro: '丰富好味',
-              img: 'static/img/index/eat/item-eat-2-2.jpg'
-            },
-            {
-              title: '东家菜',
-              intro: '丰富好味',
-              img: 'static/img/index/eat/item-eat-2-2.jpg'
-            },
-            {
-              title: '东家菜',
-              intro: '丰富好味',
-              img: 'static/img/index/eat/item-eat-2-2.jpg'
-            }
-          ],
-          itemContent: [
-            'static/img/index/eat/item-eat-2-6.jpg',
-            'static/img/index/eat/item-eat-2-7.jpg',
-            'static/img/index/eat/item-eat-2-8.jpg'
           ]
         }
       ]
     };
     commit('SET_EAT_INFO', eat);
+  });
+};
+
+// 加载3F湖南特色扶贫馆专栏数据
+export const loadThirdFloor = ({ commit }) => {
+  return new Promise((resolve, reject) => {
+    const third = {
+      title: '3F湖南特色扶贫馆',
+      detail: [
+        {
+          bigImg: 'static/img/index/three/big.png',
+          itemFour: [
+            {
+              intro: '￥180',
+              img: 'static/img/index/three/01.png'
+            },
+            {
+              intro: '￥39',
+              img: 'static/img/index/three/02.png'
+            },
+            {
+              intro: '￥228',
+              img: 'static/img/index/three/03.png'
+            },
+            {
+              intro: '￥22.8',
+              img: 'static/img/index/three/04.png'
+            },
+            {
+              intro: '￥28.8',
+              img: 'static/img/index/three/05.png'
+            },
+            {
+              intro: '￥58',
+              img: 'static/img/index/three/06.png'
+            }
+          ]
+        }
+      ]
+    };
+    commit('SET_THIRD_INFO', third);
+  });
+};
+
+// 加载4F江西特色扶贫馆专栏数据
+export const loadFourthFloor = ({ commit }) => {
+  return new Promise((resolve, reject) => {
+    const fourth = {
+      title: '4F江西特色扶贫馆',
+      detail: [
+        {
+          bigImg: 'static/img/index/fourth/big.jpg',
+          itemFour: [
+            {
+              intro: '￥29.9',
+              img: 'static/img/index/fourth/01.jpg'
+            },
+            {
+              intro: '￥26.8',
+              img: 'static/img/index/fourth/02.png'
+            },
+            {
+              intro: '￥31.9',
+              img: 'static/img/index/fourth/03.png'
+            },
+            {
+              intro: '￥14.5',
+              img: 'static/img/index/fourth/04.png'
+            },
+            {
+              intro: '￥49.9',
+              img: 'static/img/index/fourth/05.png'
+            },
+            {
+              intro: '￥29.8',
+              img: 'static/img/index/fourth/06.png'
+            }
+          ]
+        }
+      ]
+    };
+    commit('SET_FOURTH_INFO', fourth);
+  });
+};
+
+// 加载5F陕西江西特色扶贫馆专栏数据
+export const loadFifthFloor = ({ commit }) => {
+  return new Promise((resolve, reject) => {
+    const fifth = {
+      title: '5F陕西特色扶贫馆',
+      detail: [
+        {
+          bigImg: 'static/img/index/fifth/big.png',
+          itemFour: [
+            {
+              intro: '￥58.8',
+              img: 'static/img/index/fifth/01.png'
+            },
+            {
+              intro: '￥68',
+              img: 'static/img/index/fifth/02.png'
+            },
+            {
+              intro: '￥128',
+              img: 'static/img/index/fifth/03.png'
+            },
+            {
+              intro: '￥49.9',
+              img: 'static/img/index/fifth/04.png'
+            },
+            {
+              intro: '￥38.9',
+              img: 'static/img/index/fifth/05.png'
+            },
+            {
+              intro: '￥15.9',
+              img: 'static/img/index/fifth/06.png'
+            }
+          ]
+        }
+      ]
+    };
+    commit('SET_FIFTH_INFO', fifth);
+  });
+};
+
+// 加载6F湖北江西特色扶贫馆专栏数据
+export const loadSixthFloor = ({ commit }) => {
+  return new Promise((resolve, reject) => {
+    const sixth = {
+      title: '6F湖北特色扶贫馆',
+      detail: [
+        {
+          bigImg: 'static/img/index/sixth/big.jpg',
+          itemFour: [
+            {
+              intro: '￥58.8',
+              img: 'static/img/index/sixth/01.png'
+            },
+            {
+              intro: '￥68',
+              img: 'static/img/index/sixth/02.png'
+            },
+            {
+              intro: '￥128',
+              img: 'static/img/index/sixth/03.png'
+            },
+            {
+              intro: '￥49.9',
+              img: 'static/img/index/sixth/04.jpg'
+            },
+            {
+              intro: '￥38.9',
+              img: 'static/img/index/sixth/05.png'
+            },
+            {
+              intro: '￥15.9',
+              img: 'static/img/index/sixth/06.png'
+            }
+          ]
+        }
+      ]
+    };
+    commit('SET_SIXTH_INFO', sixth);
   });
 };
 
@@ -221,143 +315,86 @@ export const loadGoodsInfo = ({ commit }) => {
     setTimeout(() => {
       const data = {
         goodsImg: [
-          'static/img/goodsDetail/item-detail-1.jpg',
-          'static/img/goodsDetail/item-detail-2.jpg',
-          'static/img/goodsDetail/item-detail-3.jpg',
-          'static/img/goodsDetail/item-detail-4.jpg'
+          'static/img/goodsDetail/itemDetailOne/1.jpg',
+          'static/img/goodsDetail/itemDetailOne/2.jpg',
+          'static/img/goodsDetail/itemDetailOne/3.jpg',
+          'static/img/goodsDetail/itemDetailOne/4.jpg'
         ],
-        title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳',
-        tags: ['满69-20元', '关注产品★送钢化膜', 'BIT配次日达'],
+        title: '【西藏扶贫商品】净土 一捧藜麦',
+        tags: ['一捧胜百谷'],
         discount: ['满148减10', '满218减20', '满288减30'],
         promotion: ['跨店满减', '多买优惠'],
-        remarksNum: 6000,
         setMeal: [
           [
             {
-              img: 'static/img/goodsDetail/pack/1.jpg',
-              intro: '4.7英寸-深邃蓝',
-              price: 28.0
+              intro: '250g*2',
+              price: 54.0
             },
             {
-              img: 'static/img/goodsDetail/pack/2.jpg',
-              intro: '4.7英寸-星空黑',
-              price: 29.0
-            },
-            {
-              img: 'static/img/goodsDetail/pack/3.jpg',
-              intro: '5.5英寸-香槟金',
-              price: 28.5
-            }
-          ],
-          [
-            {
-              img: 'static/img/goodsDetail/pack/4.jpg',
-              intro: '5.5英寸-玫瑰金',
-              price: 32.0
-            },
-            {
-              img: 'static/img/goodsDetail/pack/5.jpg',
-              intro: '5.5英寸-深邃蓝',
-              price: 32.0
-            },
-            {
-              img: 'static/img/goodsDetail/pack/6.jpg',
-              intro: '5.5英寸-星空黑',
-              price: 35.0
-            }
-          ],
-          [
-            {
-              img: 'static/img/goodsDetail/pack/7.jpg',
-              intro: '4.7英寸-香槟金',
-              price: 26.0
-            },
-            {
-              img: 'static/img/goodsDetail/pack/8.jpg',
-              intro: '4.7英寸-玫瑰金',
-              price: 25.0
-            },
-            {
-              img: 'static/img/goodsDetail/pack/9.jpg',
-              intro: '4.7英寸-中国红',
-              price: 28.0
+              intro: '500g*2',
+              price: 98.0
             }
           ]
         ],
-        hot: [
-          {
-            img: 'static/img/goodsDetail/hot/1.jpg',
-            price: 28.0,
-            sale: 165076
-          },
-          {
-            img: 'static/img/goodsDetail/hot/2.jpg',
-            price: 36.0,
-            sale: 135078
-          },
-          {
-            img: 'static/img/goodsDetail/hot/3.jpg',
-            price: 38.0,
-            sale: 105073
-          },
-          {
-            img: 'static/img/goodsDetail/hot/4.jpg',
-            price: 39.0,
-            sale: 95079
-          },
-          {
-            img: 'static/img/goodsDetail/hot/5.jpg',
-            price: 25.0,
-            sale: 5077
-          },
-          {
-            img: 'static/img/goodsDetail/hot/6.jpg',
-            price: 20.0,
-            sale: 3077
-          }
-        ],
+        // hot: [
+        //   {
+        //     img: 'static/img/goodsDetail/hot/1.jpg',
+        //     price: 28.0,
+        //     sale: 165076
+        //   },
+        //   {
+        //     img: 'static/img/goodsDetail/hot/2.jpg',
+        //     price: 36.0,
+        //     sale: 135078
+        //   },
+        //   {
+        //     img: 'static/img/goodsDetail/hot/3.jpg',
+        //     price: 38.0,
+        //     sale: 105073
+        //   },
+        //   {
+        //     img: 'static/img/goodsDetail/hot/4.jpg',
+        //     price: 39.0,
+        //     sale: 95079
+        //   },
+        //   {
+        //     img: 'static/img/goodsDetail/hot/5.jpg',
+        //     price: 25.0,
+        //     sale: 5077
+        //   },
+        //   {
+        //     img: 'static/img/goodsDetail/hot/6.jpg',
+        //     price: 20.0,
+        //     sale: 3077
+        //   }
+        // ],
         goodsDetail: [
-          'static/img/goodsDetail/intro/1.jpg',
-          'static/img/goodsDetail/intro/2.jpg',
-          'static/img/goodsDetail/intro/3.jpg',
-          'static/img/goodsDetail/intro/4.jpg'
+          'static/img/goodsDetail/intro/1.jpg'
         ],
         param: [
           {
             title: '商品名称',
-            content: 'iPhone 7手机壳'
+            content: '净土 一捧藜麦'
           },
           {
             title: '商品编号',
-            content: '10435663237'
+            content: '1000015606'
           },
           {
             title: '店铺',
-            content: 'Gavin Shop'
+            content: '拉萨净土产业旗舰店'
           },
           {
             title: '商品毛重',
-            content: '100.00g'
+            content: '250.00g'
           },
           {
             title: '商品产地',
-            content: '中国大陆'
+            content: '拉萨'
           },
           {
-            title: '机型',
-            content: 'iPhone 7'
-          },
-          {
-            title: '材质',
-            content: 'PC/塑料'
-          },
-          {
-            title: '款式',
-            content: '软壳'
-          },
-          {
-            title: '适用人群',
-            content: '通用'
+            title: '上架时间',
+            content: '2018-11-06 18:18:18'
           }
         ],
         remarks: {
@@ -610,59 +647,7 @@ export const addShoppingCart = ({ commit }, data) => {
   });
 };
 
-// 获取用户推荐
-export const loadRecommend = ({ commit }) => {
-  return new Promise((resolve, reject) => {
-    const data = [
-      [
-        {
-          img: 'static/img/otherBuy/1.jpg',
-          intro: 'iPhone7/6s/8钢化膜苹果7Plus全屏全覆盖3D抗蓝',
-          price: 29.00
-        },
-        {
-          img: 'static/img/otherBuy/2.jpg',
-          intro: '苹果数据线 苹果iPhoneX/6s/7plus/8充电线',
-          price: 36.00
-        },
-        {
-          img: 'static/img/otherBuy/3.jpg',
-          intro: '苹果8/7/6/6s钢化膜 iphone8/7/6s/6钢化玻璃',
-          price: 19.00
-        },
-        {
-          img: 'static/img/otherBuy/4.jpg',
-          intro: 'iPhone6s/7钢化膜苹果8 Plus手机膜抗蓝光非全屏',
-          price: 28.00
-        }
-      ],
-      [
-        {
-          img: 'static/img/otherBuy/5.jpg',
-          intro: '苹果6s手机壳iPhone6s Plus保护壳防摔全',
-          price: 28.00
-        },
-        {
-          img: 'static/img/otherBuy/6.jpg',
-          intro: 'iPhone7/8手机壳手机套防摔磨砂保护壳星空黑☆全包保护',
-          price: 30.00
-        },
-        {
-          img: 'static/img/otherBuy/7.jpg',
-          intro: '数据线 适用于苹果iPhone 6s/6plus/7plus/8/X',
-          price: 18.00
-        },
-        {
-          img: 'static/img/otherBuy/8.jpg',
-          intro: 'iPhone8/7/6S/6钢化膜 苹果8/7/6s/6玻璃膜 手机高',
-          price: 15.00
-        }
-      ]
-    ];
-    commit('SET_RECOMMEND_INFO', data);
-  });
-};
-
+// 个人中心地址
 export const loadAddress = ({ commit }) => {
   return new Promise((resolve, reject) => {
     const address = [
@@ -691,19 +676,20 @@ export const loadAddress = ({ commit }) => {
   });
 };
 
-export const loadShoppingCart = ({ commit }) => {
-  return new Promise((resolve, reject) => {
-    const data = [{
-      goods_id: 1529931938150,
-      count: 1,
-      img: 'static/img/goodsDetail/pack/1.jpg',
-      package: '4.7英寸-深邃蓝',
-      price: 28,
-      title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳'
-    }];
-    commit('SET_SHOPPING_CART', data);
-  });
-};
+// 购物车默认商品
+// export const loadShoppingCart = ({ commit }) => {
+//   return new Promise((resolve, reject) => {
+//     const data = [{
+//       goods_id: 1529931938150,
+//       count: 1,
+//       img: 'static/img/goodsDetail/pack/1.jpg',
+//       package: '4.7英寸-深邃蓝',
+//       price: 28,
+//       title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳'
+//     }];
+//     commit('SET_SHOPPING_CART', data);
+//   });
+// };
 
 // 添加注册用户
 export const addSignUpUser = ({ commit }, data) => {

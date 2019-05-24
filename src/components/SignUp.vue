@@ -7,12 +7,10 @@
       <i-col span="8" class="box">
         <div class="sign-up-title">
           <h1>欢迎注册账号</h1>
-          <br>
-          <h2>BIT MALL, 天天低价品质保证, 让消费者钱更值钱</h2>
         </div>
         <div class="sing-up-step-box">
           <Steps :current="signUpStep">
-              <Step title="验证手机号" icon="iphone"></Step>
+              <!--<Step title="验证手机号" icon="iphone"></Step>-->
               <Step title="填写账号信息" icon="person-add"></Step>
               <Step title="注册成功" icon="ios-checkmark-outline"></Step>
           </Steps>
@@ -55,7 +53,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .container {
   margin: 15px auto;
   height: 500px;
@@ -73,7 +71,7 @@ export default {
 .sign-up-title {
   width: 430px;
   margin: 15px auto;
-  height: 80px;
+  height: 40px;
 }
 .sing-up-step-box {
   margin: 15px auto;
@@ -88,5 +86,13 @@ export default {
   width: 350px;
   display: flex;
   align-items: center;
+  button {
+    background-color: #fd9923;
+    border-color: #fd9923;
+  }
 }
+// .ivu-btn-long {
+//   background-color: #fd9923 !important;
+//   border-color: #fd9923;
+// }
 </style>

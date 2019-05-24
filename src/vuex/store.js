@@ -39,8 +39,12 @@ export default new Vuex.Store({
       },
       goodsList: []
     },
-    computer: {}, // 电脑专栏
-    eat: {}, // 爱吃专栏
+    computer: {}, // 1F专栏
+    eat: {}, // 2F专栏
+    third: {}, // 3F专栏
+    fourth: {}, // 4F专栏
+    fifth: {}, // 5F专栏
+    sixth: {}, // 6F专栏
     asItems: [], // 广告
     goodsList: [], // 商品列表
     shoppingCart: [], // 购物车

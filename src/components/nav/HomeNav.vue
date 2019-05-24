@@ -1,104 +1,46 @@
 <template>
-  <div>
-    <div class="nav-item">
-      <ul>
-        <li v-for="(item,index) in nav" :key="index">
-          <a href="#">{{item}}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="nav-body">
-      <!-- 侧边导航 -->
-      <div class="nav-side" ref="navSide">
-        <ul>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">家用电器</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">手机</span> /
-            <span class="nav-side-item">运营商</span> /
-            <span class="nav-side-item">数码</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">电脑</span> /
-            <span class="nav-side-item">办公</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">家居</span> /
-            <span class="nav-side-item">家具</span> /
-            <span class="nav-side-item">家装</span> /
-            <span class="nav-side-item">厨具</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">男装</span> /
-            <span class="nav-side-item">女装</span> /
-            <span class="nav-side-item">童装</span> /
-            <span class="nav-side-item">内衣</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">美妆个护</span> /
-            <span class="nav-side-item">宠物</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">女鞋</span> /
-            <span class="nav-side-item">箱包</span> /
-            <span class="nav-side-item">钟表</span> /
-            <span class="nav-side-item">珠宝</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">男鞋</span> /
-            <span class="nav-side-item">运动</span> /
-            <span class="nav-side-item">户外</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">汽车</span> /
-            <span class="nav-side-item">汽车用品</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">母婴</span> /
-            <span class="nav-side-item">玩具乐器</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">食品</span> /
-            <span class="nav-side-item">酒类</span> /
-            <span class="nav-side-item">生鲜</span> /
-            <span class="nav-side-item">特产</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">礼品鲜花</span> /
-            <span class="nav-side-item">农资绿植</span>
-          </li>
-          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
-            <span class="nav-side-item">医药保健</span> /
-            <span class="nav-side-item">计生情趣</span>
-          </li>
-          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
-            <span class="nav-side-item">图书</span> /
-            <span class="nav-side-item">音像</span> /
-            <span class="nav-side-item">电子书</span>
-          </li>
-        </ul>
-      </div>
-      <div class="nav-content">
-        <!-- 幻灯片 -->
+  <div class="nav-container">
+    <!-- 轮播 -->
+      <div class="nav-carousel">
         <div>
           <Carousel autoplay loop>
               <CarouselItem  v-for="(item, index) in marketing.CarouselItems" :key="index">
-                <router-link to="/goodsList">
+                <router-link to="/goodsDetail">
                   <img :src="item">
                 </router-link>
               </CarouselItem>
           </Carousel>
         </div>
-        <div class="nav-show">
-          <div class="nav-show-img" v-for="(item, index) in marketing.activity" :key="index">
-            <router-link to="/goodsList">
-              <img :src="item">
-            </router-link>
-          </div>
-        </div>
+      </div>
+    <div class="nav-body">
+      <!-- 侧边导航 -->
+      <div class="nav-side" ref="navSide">
+        <ul>
+          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
+            <span class="nav-side-item">水果蔬菜</span>
+          </li>
+          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
+            <span class="nav-side-item">粮油副食</span>
+          </li>
+          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
+            <span class="nav-side-item">休闲零食</span>
+          </li>
+          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
+            <span class="nav-side-item">酒水茶饮</span>
+          </li>
+          <li @mouseenter="showDetail(1)" @mouseleave="hideDetail(1)">
+            <span class="nav-side-item">熟食面点</span>
+          </li>
+          <li @mouseenter="showDetail(2)" @mouseleave="hideDetail(2)">
+            <span class="nav-side-item">肉禽蛋奶</span>
+          </li>
+          <li @mouseenter="showDetail(3)" @mouseleave="hideDetail(3)">
+            <span class="nav-side-item">民族工艺品</span>
+          </li>
+        </ul>
       </div>
     </div>
+    <!------- 左侧导航隐显内容 --------->
     <transition name="fade">
       <div class="detail-item-panel panel-1" :duration="{ enter: 100, leave: 100 }" v-show="panel1" @mouseenter="showDetail(1)" ref="itemPanel1" @mouseleave="hideDetail(1)">
         <div class="nav-detail-item">
@@ -109,7 +51,7 @@
             <span class="detail-item-title">{{items.title}}
               <span class="glyphicon glyphicon-menu-right"></span>
             </span>
-            <router-link to="/goodsList" v-for="(item, subIndex) in items.tags" :key="subIndex">
+            <router-link to="/goodsDetail" v-for="(item, subIndex) in items.tags" :key="subIndex">
               <span class="detail-item">{{item}}</span>
             </router-link>
           </li>
@@ -126,13 +68,30 @@
             <span class="detail-item-title">{{items.title}}
               <span class="glyphicon glyphicon-menu-right"></span>
             </span>
-            <router-link to="/goodsList" v-for="(item, subIndex) in items.tags" :key="subIndex">
+            <router-link to="/goodsDetail" v-for="(item, subIndex) in items.tags" :key="subIndex">
               <span class="detail-item">{{item}}</span>
             </router-link>
           </li>
         </ul>
       </div>
     </transition>
+    <transition name="fade">
+        <div class="detail-item-panel panel-3" :duration="{ enter: 100, leave: 100 }" v-show="panel3" @mouseenter="showDetail(3)" ref="itemPanel3" @mouseleave="hideDetail(3)">
+          <div class="nav-detail-item">
+            <span v-for="(item, index) in panelData3.navTags" :key="index">{{item}} > </span>
+          </div>
+          <ul>
+            <li v-for="(items, index) in panelData3.classNav" :key="index" class="detail-item-row">
+              <span class="detail-item-title">{{items.title}}
+                <span class="glyphicon glyphicon-menu-right"></span>
+              </span>
+              <router-link to="/goodsDetail" v-for="(item, subIndex) in items.tags" :key="subIndex">
+                <span class="detail-item">{{item}}</span>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+      </transition>
   </div>
 </template>
 
@@ -145,112 +104,80 @@ export default {
     return {
       panel1: false,
       panel2: false,
-      nav: [
-        '秒杀',
-        '优惠券',
-        '闪购',
-        '拍卖',
-        '服装城',
-        '超市',
-        '生鲜',
-        '全球购',
-        '金融'
-      ],
+      panel3: false,
       panelData1: {
-        navTags: [ '清洁用品', '美妆商城', '美妆馆', '妆比社', '全球购美妆', '宠物馆' ],
         classNav: [
           {
-            title: '面部护肤',
-            tags: [ '补水保湿', '卸妆', '洁面', '爽肤水', '乳液面霜', '精华', '眼霜', '防晒', '面膜', '剃须', '套装' ]
+            title: '水果',
+            tags: [ '橙子', '柚子', '苹果', '蓝莓', '梨', '猕猴桃', '芒果', '哈密瓜', '桃', '火龙果', '枇杷' ]
           },
           {
-            title: '洗发护发',
-            tags: [ '洗发', '护发', '染发', '造型', '假发', '美发工具', '套装' ]
+            title: '药食同源',
+            tags: [ '芋头', '紫薯', '山药', '竹笋', '莲藕', '鲜天麻', '砂仁' ]
           },
           {
-            title: '身体护理',
-            tags: [ '补水保湿', '沐浴', '润肤', '精油', '颈部', '手足', '纤体塑形', '美胸', '套装' ]
+            title: '根茎类',
+            tags: [ '土豆', '红薯', '洋葱', '百合', '菌菇' ]
           },
           {
-            title: '口腔护理',
-            tags: [ '牙膏/牙粉', '牙刷/牙线', '漱口水', '套装' ]
+            title: '葱姜蒜椒',
+            tags: [ '姜', '蒜', '花椒', '大葱' ]
           },
           {
-            title: '女性护理',
-            tags: [ '卫生巾', '卫生护垫', '私密护理', '脱毛膏' ]
-          },
-          {
-            title: '香水彩妆',
-            tags: [ 'BB霜', '化妆棉', '女士香水', '男士香水', '底妆', '眉笔', '睫毛膏', '眼线', '眼影', '唇膏/彩' ]
-          },
-          {
-            title: '清洁用品',
-            tags: [ '纸品湿巾', '衣物清洁', '清洁工具', '家庭清洁', '一次性用品', '驱虫用品', '皮具护理' ]
-          },
-          {
-            title: '宠物生活',
-            tags: [ '水族世界', '狗粮', '猫粮', '猫狗罐头', '狗零食', '猫零食', '医疗保健', '宠物玩具', '宠物服饰' ]
-          },
-          {
-            title: '香水彩妆',
-            tags: [ 'BB霜', '化妆棉', '女士香水', '男士香水', '底妆', '眉笔', '睫毛膏', '眼线', '眼影', '唇膏/彩' ]
-          },
-          {
-            title: '清洁用品',
-            tags: [ '纸品湿巾', '衣物清洁', '清洁工具', '家庭清洁', '一次性用品', '驱虫用品', '皮具护理' ]
-          },
-          {
-            title: '宠物生活',
-            tags: [ '水族世界', '狗粮', '猫粮', '猫狗罐头', '狗零食', '猫零食', '医疗保健', '宠物玩具', '宠物服饰' ]
+            title: '蔬菜',
+            tags: [ '西葫芦', '有机菜花', '西兰花', '黄瓜', '西红柿' ]
           }
         ]
       },
       panelData2: {
-        navTags: [ '赛事', '运动城', '户外馆', '健身房', '骑行馆', '钟表城' ],
         classNav: [
           {
-            title: '2017新品',
-            tags: [ '休闲鞋', '商务休闲鞋', '正装鞋', '帆布鞋', '凉鞋', '拖鞋', '功能鞋', '增高鞋', '工装鞋', '雨鞋' ]
+            title: '米粮杂面',
+            tags: [ '米', '面粉', '粉条', '面条', '玉米', '薏米', '其他' ]
           },
           {
-            title: '运动鞋包',
-            tags: [ '跑步鞋', '休闲鞋', '篮球鞋', '帆布鞋', '板鞋', '拖鞋', '运动包' ]
+            title: '油盐酱醋',
+            tags: [ '食用油', '醋', '酱油', '生抽', '料酒' ]
           },
           {
-            title: '健身训练',
-            tags: [ '跑步机', '健身车/动感单车', '椭圆机', '综合训练器', '划船机', '甩脂机', '倒立机', '武术搏击' ]
+            title: '调味品',
+            tags: [ '花椒', '辣椒面', '酱类', '豆腐乳', '干辣椒', '调味油', '八角', '糖' ]
           },
           {
-            title: '骑行运动',
-            tags: [ '山地车', '公路车', '折叠车', '骑行服', '电动车', '电动滑板车', '城市自行车', '平衡车' ]
+            title: '坚果',
+            tags: [ '木耳', '食用菌菇', '杜仲', '豆腐干', '核桃', '花生', '板栗', '红枣' ]
           },
           {
-            title: '体育用品',
-            tags: [ '乒乓球', '羽毛球', '篮球', '足球', '轮滑滑板', '网球', '高尔夫', '台球', '排球' ]
+            title: '豆制品',
+            tags: [ '腐竹', '香干', '其他', '豆泡' ]
+          }
+        ]
+      },
+      panelData3: {
+        classNav: [
+          {
+            title: '蒙古族',
+            tags: [ '皮雕画', '骨雕产品', '蒙古刀', '蒙古袍', '皮酒壶', '皮帽' ]
           },
           {
-            title: '户外鞋服',
-            tags: [ '户外风衣', '徒步鞋', 'T恤', '冲锋衣裤', '速干衣裤', '越野跑鞋', '滑雪服', '羽绒服/棉服', '休闲衣裤' ]
+            title: '回族',
+            tags: [ '刺绣', '剪纸', '面花', '镜子', '地毯', '茶叶' ]
           },
           {
-            title: '户外装备',
-            tags: [ '背包', '帐篷/垫子', '望远镜', '烧烤用具', '便携桌椅床', '户外配饰', '军迷用品', '野餐用品' ]
+            title: '苗族',
+            tags: [ '银饰牛头', '竹制乐器', '敬酒牛角', '苗银耳环', '银饰项圈', '麒麟吊链' ]
           },
           {
-            title: '垂钓用品',
-            tags: [ '钓竿', '鱼线', '浮漂', '鱼饵', '钓鱼配件', '渔具包', '钓箱钓椅', '鱼线轮', '钓鱼灯' ]
+            title: '维吾尔族',
+            tags: [ '新疆地毯', '和田玉雕', '维吾尔摇床', '新疆土陶', '民间印染', '帕拉孜' ]
           },
           {
-            title: '游泳用品',
-            tags: [ '女士泳衣', '比基尼', '男士泳衣', '泳镜', '游泳圈', '游泳包防水包', '泳帽', '游泳配件' ]
+            title: '土家族',
+            tags: [ '土家族服饰', '西兰卡普', '织锦技艺', '木刻工艺', '编织工艺' ]
           },
           {
-            title: '垂钓用品',
-            tags: [ '钓竿', '鱼线', '浮漂', '鱼饵', '钓鱼配件', '渔具包', '钓箱钓椅', '鱼线轮', '钓鱼灯' ]
-          },
-          {
-            title: '游泳用品',
-            tags: [ '女士泳衣', '比基尼', '男士泳衣', '泳镜', '游泳圈', '游泳包防水包', '泳帽', '游泳配件' ]
+            title: '汉族',
+            tags: [ '剪纸', '年画', '布艺', '刺绣', '春联', '花灯', '竹编', '脸谱', '瓷器', '泥塑' ]
           }
         ]
       }
@@ -261,10 +188,30 @@ export default {
   },
   methods: {
     showDetail (index) {
-      index === 1 ? (this.panel1 = true) : (this.panel2 = true);
+      if (index === 1) {
+        this.panel1 = true;
+        this.panel2 = false;
+        this.panel3 = false;
+      } else if (index === 2) {
+        this.panel1 = false;
+        this.panel2 = true;
+        this.panel3 = false;
+      } else if (index === 3) {
+        this.panel1 = false;
+        this.panel2 = false;
+        this.panel3 = true;
+      }
+    //   index === 1 ? (this.panel1 = true) : (this.panel2 = true);
     },
     hideDetail (index) {
-      index === 1 ? (this.panel1 = false) : (this.panel2 = false);
+      if (index === 1) {
+        this.panel1 = false;
+      } else if (index === 2) {
+        this.panel2 = false;
+      } else if (index === 3) {
+        this.panel3 = false;
+      }
+    //   index === 1 ? (this.panel1 = false) : (this.panel2 = false);
     }
   },
   mounted () {
@@ -272,22 +219,34 @@ export default {
       this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + 'px';
     this.$refs.itemPanel2.style.left =
       this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + 'px';
+    this.$refs.itemPanel3.style.left =
+      this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + 'px';
+
     this.$refs.itemPanel1.style.top = this.$refs.navSide.offsetTop + 'px';
     this.$refs.itemPanel2.style.top = this.$refs.navSide.offsetTop + 'px';
+    this.$refs.itemPanel3.style.top = this.$refs.navSide.offsetTop + 'px';
   },
   updated () {
     this.$refs.itemPanel1.style.left =
       this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + 'px';
     this.$refs.itemPanel2.style.left =
       this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + 'px';
+    this.$refs.itemPanel3.style.left =
+      this.$refs.navSide.offsetLeft + this.$refs.navSide.offsetWidth + 'px';
+
     this.$refs.itemPanel1.style.top = this.$refs.navSide.offsetTop + 'px';
     this.$refs.itemPanel2.style.top = this.$refs.navSide.offsetTop + 'px';
+    this.$refs.itemPanel3.style.top = this.$refs.navSide.offsetTop + 'px';
   },
   store
 };
 </script>
 
 <style scoped>
+.nav-container {
+  width: 100%;
+  height: 450px;
+}
 .nav-item {
   width: 680px;
   height: 36px;
@@ -318,12 +277,14 @@ export default {
   margin: 0px auto;
 }
 .nav-side {
+  position: absolute;
   width: 200px;
-  height: 100%;
+  height: 450px;
   padding: 0px;
   color: #fff;
   float: left;
   background-color: #6e6568;
+  opacity: 0.85;
 }
 .nav-side ul {
   width: 100%;
@@ -346,9 +307,8 @@ export default {
 }
 
 /*导航内容*/
-.nav-content {
-  width: 792px;
-  margin-left: 15px;
+.nav-carousel {
+  width: 100%;
   overflow: hidden;
   float: left;
 }
@@ -367,7 +327,7 @@ export default {
 /*显示商品详细信息*/
 .detail-item-panel {
   width: 815px;
-  height: 485px;
+  height: 450px;
   background-color: #fff;
   position: absolute;
   top: 168px;
