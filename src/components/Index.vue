@@ -42,7 +42,10 @@
         <div class="seckill-content">
           <div class="seckill-item" v-for="(item, index) in seckills.goodsList" :key="index">
             <div class="seckill-item-img">
-              <router-link to="/goodsDetail"><img :src="item.img"></router-link>
+              <!-- <router-link to="/goodsDetail" @click="gotoDetail(123)"><img :src="item.img"></router-link> -->
+              <a @click="gotoDetail(123)">
+                <img :src="item.img">
+              </a>
             </div>
             <div class="seckill-item-info">
               <p>{{item.intro}}</p>
@@ -88,7 +91,7 @@
         </div>
       </div>
       <!-- 2F西藏特色扶贫馆 -->
-      <!-- <div class="item-class">
+      <div class="item-class">
         <div class="item-class-head item-class-eat-head">
           <span class="item-class-title">{{eat.title}}</span>
           <ul>
@@ -117,7 +120,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <!-- 3F湖南特色扶贫馆 -->
       <!-- <div class="item-class">
         <div class="item-class-head item-class-eat-head">
@@ -266,12 +269,25 @@ export default {
   },
   data () {
     return {
-      setIntervalObj: null
+      setIntervalObj: null,
+      page: 123
     };
   },
   methods: {
     ...mapActions([ 'loadSeckillsInfo', 'loadCarouselItems', 'loadFirstFloor', 'loadSecondFloor', 'loadThirdFloor', 'loadFourthFloor', 'loadFifthFloor', 'loadSixthFloor' ]),
-    ...mapMutations(['REDUCE_SECKILLS_TIME'])
+    ...mapMutations(['REDUCE_SECKILLS_TIME']),
+    gotoDetail (goodsId) {
+      if (goodsId) {
+        this.$router.push({
+          path: 'goodsDetail',
+          query: {
+            goodsId
+          }
+        });
+      } else {
+        this.$router.push({path: 'goodsDetail'});
+      }
+    }
   },
   computed: {
     ...mapState([ 'seckills', 'computer', 'eat', 'third', 'fourth', 'fifth', 'sixth' ]),

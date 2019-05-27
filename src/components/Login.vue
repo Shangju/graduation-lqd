@@ -23,14 +23,14 @@
                   </i-input>
               </FormItem>
               <FormItem prop="vali">
-                <i-input type="text" v-model="formDate.vali" clearable size="large" placeholder="验证码" style="width: 150px">
+                <i-input type="text" v-model="formDate.vali" clearable size="large" placeholder="验证码" style="width: 100px">
                 </i-input>
-                <img style="width: 150px;" :src="formDate.imgSrc" @click="refreshCaptcha">
+                <div class="verifiCode">
+                  <img style="width: 140px;" :src="formDate.imgSrc" @click="refreshCaptcha">
+                </div>
               </FormItem>
-
               <FormItem>
-                  <Button type="error" size="large" @click="handleSubmit()" long>登陆</Button>
-                  <!--<Button type="error" size="large" @click="test1()" long>测试</Button>-->
+                <Button type="error" size="large" @click="handleSubmit()" long>登陆</Button>
               </FormItem>
           </Form>
           </div>
@@ -44,7 +44,7 @@
 <script>
 import Footer from '@/components/footer/Footer';
 import store from '@/vuex/store';
-import { mapMutations, mapActions } from 'vuex';
+// import { mapActions } from 'vuex';
 export default {
   name: 'Login',
   data () {
@@ -68,12 +68,12 @@ export default {
   },
   methods: {
     handleSubmit () {
-      let userInfo = {adminName:this.formDate.username, userPassword:this.formDate.password,captcha:this.formDate.vali}
+      let userInfo = {adminName: this.formDate.username, userPassword: this.formDate.password, captcha: this.formDate.vali};
       // let self = this; // 定义一个变量指向vue实例
-      this.$axios.post('http://localhost:8088/sys/login',userInfo).then(function (res) {
-        if(res.data.msg != null){
+      this.$axios.post(this.global.baseUrl + '/sys/login', userInfo).then(function (res) {
+        if (res.data.msg != null) {
           alert(res.data.msg);
-        }else {
+        } else {
           // alert(res.data.data.token);
           // 放置token到Cookie,保存7天
           // Cookies.set('token', res.data.data.token,{expires: 7});
@@ -81,17 +81,17 @@ export default {
           localStorage.setItem('loginInfo', JSON.stringify(userInfo));
           // 登录成功，跳转到主页
           // localStorage.setItem('loginInfo', JSON.stringify(userInfo));
-          window.location.href = "/";
+          window.location.href = '/';
         }
       }).catch(function (res) {
         alert(res);
       });
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.login(father.formDate).then(result => {
+          this.login(this.formDate).then(result => {
             if (result) {
               this.$Message.success('登陆成功');
-              father.$router.push('/');
+              this.$router.push('/');
             } else {
               this.$Message.error('用户名或密码错误');
             }
@@ -101,8 +101,8 @@ export default {
         }
       });
     },
-    refreshCaptcha: function() {
-      this.formDate.imgSrc =  "http://localhost:8088/captcha.jpg?t=" + new Date().getTime();
+    refreshCaptcha: function () {
+      this.formDate.imgSrc = this.global.baseUrl + '/captcha.jpg?t=' + new Date().getTime();
     }
   },
   components: {
@@ -136,7 +136,7 @@ export default {
 }
 .login-container {
   width: 80%;
-  height: 280px;
+  height: 325px;
   border: #ED3F14 solid 1px;
 }
 .login-header {
@@ -151,5 +151,9 @@ export default {
 .form-box {
   width: 80%;
   margin: 30px auto;
+}
+.verifiCode {
+  margin-left: 113px;
+  margin-top: -37px;
 }
 </style>

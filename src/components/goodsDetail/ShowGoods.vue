@@ -71,6 +71,7 @@
           <div class="add-buy-car">
             <InputNumber :min="1" v-model="count" size="large"></InputNumber>
             <Button type="error" size="large" @click="addShoppingCartBtn()">加入购物车</Button>
+            <!-- <Button type="error" size="large" @click="loadDetail()">加入购物车</Button> -->
           </div>
         </div>
       </div>
@@ -116,7 +117,38 @@ export default {
       };
       this.addShoppingCart(data);
       this.$router.push('/shoppingCart');
+    },
+    loadDetail () {
+      let goodsId = this.getUrlParam('goodsId');
+      if (!goodsId) {
+        this.goHome();
+        return;
+      }
+      let goodsInfo = {goodsId: goodsId};
+      this.$axios.post(
+        this.global.baseUrl + '/loadDetail',
+        goodsInfo
+      ).then((res) => {
+        if (res.data.code === 200) {
+          alert(JSON.stringify(res.data.data));
+          this.product = res.data.data;
+          this.mainImage = this.product.image;
+          let subImages = this.product.subImages;
+          let array = subImages.split(',');
+          for (let i = 0; i < array.length; i++) {
+            this.subImages.push(array[i]);
+          }
+        // alert(this.subImages[2]);
+        } else {
+          this.isShowProduct = false;
+        }
+      }).catch(function (res) {
+        alert(res);
+      });
     }
+  },
+  created () {
+    this.loadDetail();
   },
   mounted () {
     const father = this;

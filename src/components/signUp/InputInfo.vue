@@ -16,10 +16,12 @@
         <FormItem label="确认密码" prop="repassword">
             <i-input type="password" v-model="formValidate.repassword" clearable size="large" placeholder="请再次输入你的密码"></i-input>
         </FormItem>
-       <FormItem prop="vali">
-         <i-input type="text" v-model="formValidate.vali" clearable size="large" placeholder="验证码" style="width: 100px">
+       <FormItem label="验证码" prop="vali">
+         <i-input type="text" v-model="formValidate.vali" clearable size="large" placeholder="验证码" style="width: 98px">
          </i-input>
-         <img style="width: 100px;" :src="formValidate.imgSrc" @click="refreshCaptcha">
+         <div class="verifiCode">
+           <img style="width: 135px;" :src="formValidate.imgSrc" @click="refreshCaptcha">
+         </div>
        </FormItem>
         <Button type="error" size="large" long @click="handleSubmit('formValidate')">注册</Button>
     </Form>
@@ -84,17 +86,18 @@ export default {
         captcha: this.formValidate.vali
       };
       // 定义一个变量指向vue实例
-      let self = this;
-      this.$axios.post('http://localhost:8088/sys/register',userInfo).then(function (res) {
-        if(res.data.code === 200){
-          //跳向注册成功界面
+      // let self = this;
+      this.$axios.post(this.global.baseUrl + '/sys/register', userInfo).then((res) => {
+        if (res.data.code === 200) {
+          // 跳向注册成功界面
           // self.loadPage('result', {'type': 'user-register'});
-          self.$Message.success('注册成功');
-        }else {
+          // this.$Message.success('注册成功');
+          this.$router.push({ path: '/SignUp/signUpDone' });
+        } else {
           alert(res.data.msg);
         }
       }).catch(function (res) {
-        alert("系统内部异常，请联系管理员");
+        alert('系统内部异常，请联系管理员');
       });
       // const father = this;
       // this.$refs[name].validate((valid) => {
@@ -114,8 +117,8 @@ export default {
       //   }
       // });
     },
-    refreshCaptcha: function() {
-      this.formValidate.imgSrc =  "http://localhost:8088/captcha.jpg?t=" + new Date().getTime();
+    refreshCaptcha: function () {
+      this.formValidate.imgSrc = this.global.baseUrl + '/captcha.jpg?t=' + new Date().getTime();
     }
   },
   store
@@ -125,5 +128,12 @@ export default {
 <style scoped>
 .info-form {
   width: 90% !important;
+}
+.verifiCode {
+  margin-left: 102px;
+  margin-top: -36px;
+}
+.sing-up-step-box[data-v-d21a9130] {
+  height: 460px;
 }
 </style>
