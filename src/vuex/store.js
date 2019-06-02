@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isLogin: 0, // 0表示用户未登录，1表示用户已登录
     isLoading: false, // 是否展示loading动画
     orderBy: 'sale', // 根据什么字段排序
     goodsInfo: { // 商品详情

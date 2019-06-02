@@ -44,6 +44,7 @@
 <script>
 import Footer from '@/components/footer/Footer';
 import store from '@/vuex/store';
+
 // import { mapActions } from 'vuex';
 export default {
   name: 'Login',

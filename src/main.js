@@ -9,6 +9,7 @@ import axios from 'axios';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import global from '@/utils/global';
+// import store from './vuex/store';
 Vue.use(ElementUI);
 
 Vue.use(iView);
@@ -26,6 +27,31 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(route => {
   iView.LoadingBar.finish();
+});
+
+// 依据是否登录跳转路由
+router.beforeEach((to, from, next) => {
+// 登录界面登录成功之后，会把用户信息保存在会话
+// 存在时间为会话生命周期，页面关闭即失效。
+// token 7天后失效
+  let token = localStorage.getItem('loginInfo');
+  if (to.path === '/Login') {
+    // 如果是访问登录界面，如果用户会话信息token存在，代表已登录过，跳转到主页
+    if (token) {
+      next({path: '/'});
+    } else {
+      next();
+    }
+  }
+  if (to.meta.requestAuth) {
+    if (token) {
+      next();
+    } else {
+      next({ path: '/Login' });
+    }
+  } else {
+    next();
+  }
 });
 
 /* eslint-disable no-new */

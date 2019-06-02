@@ -9,6 +9,11 @@
         <template slot="desc">请点击商品前的选择框，选择购物车中的商品，点击付款即可。</template>
       </Alert>
       <Table border ref="selection" :columns="columns" :data="shoppingCart" size="large" @on-selection-change="select" no-data-text="您的购物车没有商品，请先添加商品到购物车再点击购买"></Table>
+      <!-- <template slot-scope="{}" slot="quantity">
+        <FormItem prop="quantity" >
+          <InputNumber size="small" ></InputNumber>
+        </FormItem>
+	    </template> -->
       <div class="address-container">
         <h3>收货人信息</h3>
         <div class="address-box">
@@ -25,18 +30,14 @@
                 选择地址
                 <p slot="content">
                   <RadioGroup vertical size="large" @on-change="changeAddress">
-                    <Radio :label="item.addressId" v-for="(item, index) in address" :key="index">
-                      <span>{{item.name}} {{item.province}} {{item.city}} {{item.address}} {{item.phone}} {{item.postalcode}}</span>
+                    <Radio :label="item.addressId" v-for="(item, index) in addressData" :key="index">
+                      <span>{{item.userAddress}} {{item.cityName}} {{item.areaName}} {{item.userPhone}}</span>
                     </Radio>
                   </RadioGroup>
                 </p>
             </Panel>
           </Collapse>
         </div>
-      </div>
-      <div class="remarks-container">
-        <h3>备注</h3>
-        <i-input v-model="remarks" size="large" placeholder="在这里填写备注信息" class="remarks-input"></i-input>
       </div>
       <div class="invoices-container">
         <h3>发票信息</h3>
@@ -46,7 +47,7 @@
         <div class="pay-box">
           <p><span>提交订单应付总额：</span> <span class="money"><Icon type="social-yen"></Icon> {{totalPrice.toFixed(2)}}</span></p>
           <div class="pay-btn">
-            <router-link to="/pay"><Button type="error" size="large">支付订单</Button></router-link>
+            <Button type="error" size="large" @click="addOrder()">支付订单</Button>
           </div>
         </div>
       </div>
@@ -58,8 +59,9 @@
 <script>
 import Sreach from '@/components/Sreach';
 import Footer from '@/components/footer/Footer';
+import { getAddress } from '../api.js';
 import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
+// import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Order',
   beforeRouteEnter (to, from, next) {
@@ -71,7 +73,11 @@ export default {
   },
   data () {
     return {
+      addressData: '',
+      goodsId: '',
       goodsCheckList: [],
+      shoppingCart: [],
+      goodsdata: [],
       columns: [
         {
           type: 'selection',
@@ -80,13 +86,15 @@ export default {
         },
         {
           title: '图片',
-          key: 'img',
-          width: 86,
+          key: 'mainImage',
+          width: 200,
           render: (h, params) => {
+            // console.log(params.row);
             return h('div', [
               h('img', {
                 attrs: {
-                  src: params.row.img
+                  src: params.row.mainImage,
+                  style: 'width: 120px; height: 83px'
                 }
               })
             ]);
@@ -94,28 +102,92 @@ export default {
           align: 'center'
         },
         {
-          title: '标题',
-          key: 'title',
+          title: '商品名称',
+          key: 'productName',
           align: 'center'
         },
         {
-          title: '套餐',
-          width: 198,
-          key: 'package',
+          title: '单价',
+          width: 120,
+          key: 'productPrice',
           align: 'center'
         },
         {
           title: '数量',
-          key: 'count',
-          width: 68,
-          align: 'center'
-        },
-        {
-          title: '价格',
-          width: 68,
-          key: 'price',
-          align: 'center'
+          key: 'quantity',
+          slot:"quantity",
+          width: 120,
+          align: 'center',
+          // render: (h, params) => {
+          //   // let quantity = params.row.quantity;
+          //   return h('div', [
+          //     h('InputNumber', {
+          //       on: {
+          //         'on-change': (event) => {
+          //           // alert(event); // event表示数字输入框的数字
+          //           this.quantity = event
+          //           console.log(params.row.quantity)
+          //         }
+          //       },
+          //       props: {
+          //         min: 0,
+          //         value: params.row.quantity
+          //         // disabled: true
+          //       },
+          //       domProps:{
+			    //         value:this.price
+			    //       },
+          //     })
+          //   ]);
+          // }
         }
+        // {
+        //   title: '合计',
+        //   width: 120,
+        //   key: 'price',
+        //   align: 'center',
+        //   render: (h, params) => {
+        //     return h('div', [
+        //       h('div', {
+        //         props: {
+        //           value: params.row.quantity * params.row.productPrice
+        //         }
+        //       })
+        //     ])
+        //   }
+        // },
+        // {
+        //   title: '操作',
+        //   width: 120,
+        //   key: 'deleteGoods',
+        //   align: 'center',
+        //   render: (h, params) => {
+        //     return h('div', [
+        //       h('i-button', {
+        //         props: {
+        //           type: 'primary'
+        //         },
+        //         style: {
+        //           width: '80%',
+        //           display: 'flex',
+        //           'justify-content': 'center'
+        //         },
+        //         on: {
+        //           click: () => {
+        //             let params = {
+        //               goodsId: params.row.goodsId
+        //             };
+        //             alert(goodsId);
+        //             delGoods(params).then(res => {
+        //               this.$message.success('删除成功！');
+        //               this.getCartInfo();
+        //             });
+        //           }
+        //         }
+        //       }, '删除')
+        //     ]);
+        //   }
+        // }
       ],
       checkAddress: {
         name: '未选择',
@@ -125,32 +197,81 @@ export default {
     };
   },
   computed: {
-    ...mapState(['address', 'shoppingCart']),
     totalPrice () {
       let price = 0;
       this.goodsCheckList.forEach(item => {
-        price += item.price * item.count;
+        price += item.productPrice * item.quantity;
       });
       return price;
     }
   },
   methods: {
-    ...mapActions(['loadAddress']),
+    addOrder () {
+      this.$router.push('/pay');
+      // let userOrder = {
+      //   userId: '123'
+      //   // orderId:
+      // };
+      // this.$axios.post(
+      //   this.global.baseUrl + '/addOrder',
+      //   userOrder
+      // ).then((res) => {
+      //   if (res.data.code === 200) {
+      //     this.$router.push('/Pay');
+      //   } else {
+      //     alert(res.data.msg);
+      //   }
+      // }).catch(function (res) {
+      //   alert(res);
+      // });
+    },
+    loadAddress () { // 加载收货地址信息
+      let params = {
+        userId: '123'
+      };
+      getAddress(params).then(res => {
+        // console.log(JSON.stringify(res.data));
+        this.addressData = res.data;
+      });
+    },
     select (selection, row) {
-      console.log(selection);
+      // console.log(selection);
       this.goodsCheckList = selection;
     },
     changeAddress (data) {
-      const father = this;
-      this.address.forEach(item => {
+      // const father = this;
+      this.addressData.forEach(item => {
         if (item.addressId === data) {
-          father.checkAddress.name = item.name;
-          father.checkAddress.address = `${item.name} ${item.province} ${item.city} ${item.address} ${item.phone} ${item.postalcode}`;
+          this.checkAddress.name = item.name;
+          this.checkAddress.address = `${item.userAddress} ${item.cityName} ${item.areaName}`;
         }
+      });
+    },
+    // 获取购物车数据
+    getCartInfo () {
+      this.$axios.post(
+        this.global.baseUrl + '/cart/getCartInfo'
+      ).then((res) => {
+        if (res.data.code === 200) {
+          console.log(JSON.stringify(res.data));
+          this.shoppingCart = res.data.data;
+          // this.cartList = res.data.data;
+          // for (let i = 0; i < this.cartList.length; i++) {
+          //   this.totalNum = this.totalNum + this.cartList[i].quantity;
+          //   this.totalPrice = this.totalPrice + this.cartList[i].productPrice * this.cartList[i].quantity;
+          // }
+        } else {
+          // this.cartList = [];
+          this.isShowCart = false;
+        }
+      }).catch(function (res) {
+        alert(res);
       });
     }
   },
   mounted () {
+    this.getCartInfo(); // 获取购物车列表
+    this.loadAddress(); // 获取收货地址
     setTimeout(() => {
       this.$refs.selection.selectAll(true);
     }, 500);

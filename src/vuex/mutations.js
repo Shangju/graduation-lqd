@@ -10,6 +10,11 @@ export const SET_USER_LOGIN_INFO = (state, data) => {
   state.userInfo = data;
 };
 
+// 设置用户登录状态 0表示未登录 1表示已登录
+// export const changeLogin = (state, data) => {
+//   state.isLogin = state;
+// };
+
 // 设置加载状态
 export const SET_LOAD_STATUS = (state, status) => {
   state.isLoading = status;

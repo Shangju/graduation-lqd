@@ -336,38 +336,6 @@ export const loadGoodsInfo = ({ commit }) => {
             }
           ]
         ],
-        // hot: [
-        //   {
-        //     img: 'static/img/goodsDetail/hot/1.jpg',
-        //     price: 28.0,
-        //     sale: 165076
-        //   },
-        //   {
-        //     img: 'static/img/goodsDetail/hot/2.jpg',
-        //     price: 36.0,
-        //     sale: 135078
-        //   },
-        //   {
-        //     img: 'static/img/goodsDetail/hot/3.jpg',
-        //     price: 38.0,
-        //     sale: 105073
-        //   },
-        //   {
-        //     img: 'static/img/goodsDetail/hot/4.jpg',
-        //     price: 39.0,
-        //     sale: 95079
-        //   },
-        //   {
-        //     img: 'static/img/goodsDetail/hot/5.jpg',
-        //     price: 25.0,
-        //     sale: 5077
-        //   },
-        //   {
-        //     img: 'static/img/goodsDetail/hot/6.jpg',
-        //     price: 20.0,
-        //     sale: 3077
-        //   }
-        // ],
         goodsDetail: [
           'static/img/goodsDetail/intro/1.jpg'
         ],
@@ -675,21 +643,6 @@ export const loadAddress = ({ commit }) => {
     commit('SET_USER_ADDRESS', address);
   });
 };
-
-// 购物车默认商品
-// export const loadShoppingCart = ({ commit }) => {
-//   return new Promise((resolve, reject) => {
-//     const data = [{
-//       goods_id: 1529931938150,
-//       count: 1,
-//       img: 'static/img/goodsDetail/pack/1.jpg',
-//       package: '4.7英寸-深邃蓝',
-//       price: 28,
-//       title: '苹果8/7手机壳iPhone7 Plus保护壳全包防摔磨砂硬外壳'
-//     }];
-//     commit('SET_SHOPPING_CART', data);
-//   });
-// };
 
 // 添加注册用户
 export const addSignUpUser = ({ commit }, data) => {

@@ -2,18 +2,19 @@
   <div>
     <Table border ref="selection" :columns="columns" :data="shoppingCart" size="large" no-data-text="您的购物车没有商品，请先添加商品到购物车再点击购买"></Table>
     <div class="go-to">
-      <Button @click="goTo" type="primary">去付款</Button>
+      <Button @click="goTo" type="primary">支付订单</Button>
     </div>
   </div>
 </template>
 
 <script>
 import store from '@/vuex/store';
-import { mapState } from 'vuex';
+// import { mapState } from 'vuex';
 export default {
   name: 'MyShoppingCart',
   data () {
     return {
+      shoppingCart: [],
       columns: [
         {
           type: 'selection',
@@ -22,13 +23,15 @@ export default {
         },
         {
           title: '图片',
-          key: 'img',
-          width: 86,
+          key: 'mainImage',
+          width: 180,
           render: (h, params) => {
+            // console.log(params.row);
             return h('div', [
               h('img', {
                 attrs: {
-                  src: params.row.img
+                  src: params.row.mainImage,
+                  style: 'width: 120px; height: 83px'
                 }
               })
             ]);
@@ -36,25 +39,25 @@ export default {
           align: 'center'
         },
         {
-          title: '标题',
-          key: 'title',
+          title: '商品名称',
+          key: 'productName',
           align: 'center'
         },
         {
-          title: '套餐',
-          width: 198,
-          key: 'package',
+          title: '单价 ',
+          width: 100,
+          key: 'productPrice',
           align: 'center'
         },
         {
           title: '数量',
-          key: 'count',
-          width: 68,
+          key: 'quantity',
+          width: 100,
           align: 'center'
         },
         {
-          title: '价格',
-          width: 68,
+          title: '合计',
+          width: 100,
           key: 'price',
           align: 'center'
         }
@@ -62,15 +65,36 @@ export default {
     };
   },
   created () {
-    // this.loadShoppingCart();
   },
   computed: {
-    ...mapState(['shoppingCart'])
+  },
+  mounted () {
+    this.getCartInfo();
   },
   methods: {
-    // ...mapActions(['loadShoppingCart']),
     goTo () {
-      this.$router.push('/order');
+      this.$router.push('/pay');
+    },
+    // 获取购物车数据
+    getCartInfo () {
+      this.$axios.post(
+        this.global.baseUrl + '/cart/getCartInfo'
+      ).then((res) => {
+        if (res.data.code === 200) {
+          console.log(JSON.stringify(res.data));
+          this.shoppingCart = res.data.data;
+          // this.cartList = res.data.data;
+          // for (let i = 0; i < this.cartList.length; i++) {
+          //   this.totalNum = this.totalNum + this.cartList[i].quantity;
+          //   this.totalPrice = this.totalPrice + this.cartList[i].productPrice * this.cartList[i].quantity;
+          // }
+        } else {
+          // this.cartList = [];
+          this.isShowCart = false;
+        }
+      }).catch(function (res) {
+        alert(res);
+      });
     }
   },
   store

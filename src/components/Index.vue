@@ -43,7 +43,7 @@
           <div class="seckill-item" v-for="(item, index) in seckills.goodsList" :key="index">
             <div class="seckill-item-img">
               <!-- <router-link to="/goodsDetail" @click="gotoDetail(123)"><img :src="item.img"></router-link> -->
-              <a @click="gotoDetail(123)">
+              <a @click="gotoDetail(recomId[index])">
                 <img :src="item.img">
               </a>
             </div>
@@ -122,7 +122,7 @@
         </div>
       </div>
       <!-- 3F湖南特色扶贫馆 -->
-      <!-- <div class="item-class">
+      <div class="item-class">
         <div class="item-class-head item-class-eat-head">
           <span class="item-class-title">{{third.title}}</span>
         </div>
@@ -146,9 +146,9 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <!-- 4F江西特色扶贫馆 -->
-      <!-- <div class="item-class">
+      <div class="item-class">
         <div class="item-class-head item-class-eat-head">
           <span class="item-class-title">{{fourth.title}}</span>
         </div>
@@ -172,9 +172,9 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <!-- 5F陕西特色扶贫馆 -->
-      <!-- <div class="item-class">
+      <div class="item-class">
         <div class="item-class-head item-class-eat-head">
           <span class="item-class-title">{{fifth.title}}</span>
           <ul>
@@ -203,7 +203,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
       <!-- 6F湖北特色扶贫馆 -->
       <!-- <div class="item-class">
         <div class="item-class-head item-class-eat-head">
@@ -270,7 +270,8 @@ export default {
   data () {
     return {
       setIntervalObj: null,
-      page: 123
+      // page: 123,
+      recomId: [1, 2, 3, 4]
     };
   },
   methods: {

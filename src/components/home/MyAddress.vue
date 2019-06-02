@@ -1,21 +1,20 @@
 <template>
   <div>
-    <div class="address-box" v-for="(item, index) in address" :key="index">
+    <div class="address-box" v-for="(item, index) in addressData" :key="index">
       <div class="address-header">
-        <span>{{item.name}}</span>
+        <span props="addressId">{{item.addressId}}</span>
         <div class="address-action">
-          <span @click="edit(index)"><Icon type="edit"></Icon> 修改</span>
-          <span @click="del(index)"><Icon type="trash-a"></Icon> 删除</span>
+          <span @click="delAddress(item.addressId)"><Icon type="trash-a"></Icon> 删除</span>
         </div>
       </div>
       <div class="address-content">
-        <p><span class="address-content-title"> 收 货 人 :</span> {{item.name}}</p>
-        <p><span class="address-content-title">收货地区:</span> {{item.province}} {{item.city}} {{item.area}}</p>
-        <p><span class="address-content-title">收货地址:</span> {{item.address}}</p>
-        <p><span class="address-content-title">邮政编码:</span> {{item.postalcode}}</p>
+        <p><span class="address-content-title"> 收 货 人 :</span>{{item.userName}}</p>
+        <p><span class="address-content-title"> 联系电话 :</span>{{item.userPhone}}</p>
+        <p><span class="address-content-title">收货地区:</span>{{item.cityName}} {{item.areaName}}</p>
+        <p><span class="address-content-title">收货地址:</span> {{item.userAddress}}</p>
       </div>
     </div>
-    <Modal v-model="modal" width="530">
+    <!-- <Modal v-model="modal" width="530">
         <p slot="header">
           <Icon type="edit"></Icon>
           <span>修改地址</span>
@@ -34,27 +33,25 @@
               <FormItem label="手机号码" prop="phone">
                 <i-input v-model="formData.phone" size="large"></i-input>
               </FormItem>
-              <FormItem label="邮政编码" prop="postalcode">
-                <i-input v-model="formData.postalcode" size="large"></i-input>
-              </FormItem>
             </Form>
         </div>
         <div slot="footer">
             <Button type="primary" size="large" long @click="editAction">修改</Button>
         </div>
-    </Modal>
+    </Modal> -->
   </div>
 </template>
 
 <script>
 import store from '@/vuex/store';
-import { mapState, mapActions } from 'vuex';
+import { delAddressInfo, getAddress } from '../../api.js';
 import Distpicker from 'v-distpicker';
 export default {
   name: 'MyAddress',
   data () {
     return {
       modal: false,
+      addressData: '',
       formData: {
         name: '',
         address: '',
@@ -81,34 +78,37 @@ export default {
       }
     };
   },
-  created () {
+  mounted () {
     this.loadAddress();
   },
   computed: {
-    ...mapState(['address'])
   },
   methods: {
-    ...mapActions(['loadAddress']),
-    edit (index) {
-      this.modal = true;
-      this.formData.province = this.address[index].province;
-      this.formData.city = this.address[index].city;
-      this.formData.area = this.address[index].area;
-      this.formData.address = this.address[index].address;
-      this.formData.name = this.address[index].name;
-      this.formData.phone = this.address[index].phone;
-      this.formData.postalcode = this.address[index].postalcode;
+    loadAddress () {
+      let params = {
+        userId: '123'
+      };
+      getAddress(params).then(res => {
+        // console.log(JSON.stringify(res.data));
+        this.addressData = res.data;
+      });
     },
     editAction () {
       this.modal = false;
       this.$Message.success('修改成功');
     },
-    del (index) {
+    delAddress (addressId) {
       this.$Modal.confirm({
         title: '信息提醒',
         content: '你确定删除这个收货地址',
-        onOk: () => {
-          this.$Message.success('删除成功');
+        onOk: () => { // 引用elment-ui 或iview的组件
+          let params = {
+            addressId
+          };
+          delAddressInfo(params).then(res => {
+            this.$Message.success('删除成功');
+            this.loadAddress();
+          });
         },
         onCancel: () => {
           this.$Message.info('取消删除');
@@ -127,6 +127,8 @@ export default {
 .address-box {
   padding: 15px;
   margin: 15px;
+  width: 40%;
+  float: left;
   border-radius: 5px;
   box-shadow: 0px 0px 5px #ccc;
 }

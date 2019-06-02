@@ -26,17 +26,17 @@
         </Row>
       </div>
       <ul class="information">
-        <li class="info-list"><span>姓名：</span><i-input size="large" placeholder="请输入真实姓名"></i-input></li>
-        <li class="info-list"><span>邮箱：</span><i-input size="large" placeholder="请输入邮箱"></i-input></li>
-        <li class="info-list"><span>联系方式：</span><i-input size="large" placeholder="请输入联系电话"></i-input></li>
+        <li class="info-list"><span>姓名：</span><i-input v-model="supplierData.name" size="large" placeholder="请输入真实姓名"></i-input></li>
+        <li class="info-list"><span>邮箱：</span><i-input v-model="supplierData.email" size="large" placeholder="请输入邮箱"></i-input></li>
+        <li class="info-list"><span>联系方式：</span><i-input v-model="supplierData.phone" size="large" placeholder="请输入联系电话"></i-input></li>
         <li class="info-list">
           <span>特产种类：</span>
-          <i-select :model.sync="model8" clearable>
-            <i-option v-for="item in cityList" :value="item.value" :key="item.label">{{ item.label }}</i-option>
+          <i-select :model.sync="model8" clearable v-model="supplierData.kind" >
+            <i-option v-for="item in cityList" :value="item.label" :key="item.value">{{ item.label }}</i-option>
           </i-select>
         </li>
-        <li class="info-list"><span>特产名称：</span><i-input size="large" placeholder="请输入特产名称"></i-input></li>
-        <li class="info-list list-submit"><i-button type="success" long>提交申请</i-button></li>
+        <li class="info-list"><span>特产名称：</span><i-input v-model="supplierData.goodsname" size="large" placeholder="请输入特产名称"></i-input></li>
+        <li class="info-list list-submit"><i-button @click="supplySubmit()" type="success" long >提交申请</i-button></li>
       </ul>
     </div>
     <Footer></Footer>
@@ -50,6 +50,13 @@ export default {
   name: 'joinSupplier',
   data () {
     return {
+      supplierData: {
+        name: '',
+        email: '',
+        phone: '',
+        kind: '',
+        goodsname: ''
+      },
       cityList: [
         {
           value: 'shucai',
@@ -88,7 +95,28 @@ export default {
     Footer
   },
   methods: {
-
+    supplySubmit () {
+      let applyInfo = {
+        applyName: this.supplierData.name,
+        applyEmail: this.supplierData.email,
+        applyPhone: this.supplierData.phone,
+        applyKind: this.supplierData.kind,
+        applyGoodsname: this.supplierData.goodsname
+      };
+      // alert(this.supplierData.kind);
+      this.$axios.post(this.global.baseUrl + '/InsertApply', applyInfo).then((res) => {
+        if (res.data.code === 200) {
+          // 跳向注册成功界面
+          // self.loadPage('result', {'type': 'user-register'});
+          // this.$Message.success('注册成功');
+          this.$router.push({ path: '/applyDone' });
+        } else {
+          alert(res.data.msg);
+        }
+      }).catch(function (res) {
+        alert('系统内部异常，请联系管理员');
+      });
+    }
   }
 };
 </script>

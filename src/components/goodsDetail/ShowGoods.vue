@@ -2,36 +2,25 @@
   <div>
     <div class="item-detail-show">
       <div class="item-detail-left">
-        <div class="item-detail-big-img">
-          <img :src="goodsInfo.goodsImg[imgIndex]" alt="">
+        <div class="item-detail-big-img" >
+          <img :src="initSrc" alt="">
         </div>
         <div class="item-detail-img-row">
-          <div class="item-detail-img-small" v-for="(item, index) in goodsInfo.goodsImg" :key="index" @mouseover="showBigImg(index)">
+          <div class="item-detail-img-small" v-for="(item, index) in subImage" :key="index" @mouseover="showBigImg(item)">
             <img :src="item" alt="">
           </div>
         </div>
       </div>
       <div class="item-detail-right">
         <div class="item-detail-title">
-          <p>{{goodsInfo.title}}</p>
-        </div>
-        <div class="item-detail-tag">
-          <p>
-            <span v-for="(item,index) in goodsInfo.tags" :key="index">【{{item}}】</span>
-          </p>
+          <p>{{product.goodsName}}</p>
         </div>
         <div class="item-detail-price-row">
           <div class="item-price-left">
             <div class="item-price-row">
               <p>
-                <span class="item-price-title">B I T 价</span>
-                <span class="item-price">￥{{price.toFixed(2)}}</span>
-              </p>
-            </div>
-            <div class="item-price-row">
-              <p>
-                <span class="item-price-title">优 惠 价</span>
-                <span class="item-price-full-cut" v-for="(item,index) in goodsInfo.discount" :key="index">{{item}}</span>
+                <span class="item-price-title">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格</span>
+                <span class="item-price">{{product.sellPrice}}</span>
               </p>
             </div>
             <div class="item-price-row">
@@ -45,16 +34,10 @@
         <!-- 选择规格 -->
         <div class="item-select">
           <div class="item-select-title">
-            <p>选择规格</p>
+            <p>商品介绍</p>
           </div>
           <div class="item-select-column">
-            <div class="item-select-row" v-for="(items, index) in goodsInfo.setMeal" :key="index">
-              <div class="item-select-box" v-for="(item, index1) in items" :key="index1" @click="select(index, index1)" :class="{'item-select-box-active': ((index * 3) + index1) === selectBoxIndex}">
-                <div class="item-select-intro">
-                  <p>{{item.intro}}</p>
-                </div>
-              </div>
-            </div>
+            <span>{{product.goodsIntroduce}}</span>
           </div>
         </div>
         <!-- 库存 -->
@@ -63,7 +46,7 @@
             <p>库存</p>
           </div>
           <div class="item-reserve">
-              <span>500</span>
+              <span>{{product.stock}}</span>
           </div>
         </div>
         <br>
@@ -89,7 +72,10 @@ export default {
       price: 0,
       count: 1,
       selectBoxIndex: 0,
-      imgIndex: 0
+      imgIndex: 0,
+      subImage: [],
+      product: {},
+      initSrc: ''
     };
   },
   computed: {
@@ -102,21 +88,52 @@ export default {
       this.price = this.goodsInfo.setMeal[index1][index2].price;
     },
     showBigImg (index) {
-      this.imgIndex = index;
+      this.initSrc = index;
     },
     addShoppingCartBtn () {
-      const index1 = parseInt(this.selectBoxIndex / 3);
-      const index2 = this.selectBoxIndex % 3;
-      const date = new Date();
-      const goodsId = date.getTime();
-      const data = {
-        goods_id: goodsId,
-        title: this.goodsInfo.title,
-        count: this.count,
-        package: this.goodsInfo.setMeal[index1][index2]
+      let userCart = {
+        productId: this.product.goodsId,
+        quantity: this.count,
+        productName: this.product.goodsName,
+        productPrice: this.product.sellPrice,
+        mainImage: this.product.image,
+        checked: true,
+        productStock: this.product.stock
       };
-      this.addShoppingCart(data);
-      this.$router.push('/shoppingCart');
+      // Cookies.set('userCart',userCart);
+      this.$axios.post(
+        this.global.baseUrl + '/cart/addCart',
+        userCart
+      ).then((res) => {
+        if (res.data.code === 200) {
+          this.$router.push('/ShoppingCart');
+        } else {
+          alert(res.data.msg);
+        }
+      }).catch(function (res) {
+        alert(res);
+      });
+    },
+    // 此方法获取url后面的值
+    getUrlParam (name) {
+    // let reg = new RegExp("(^|\\?|&)"+ name +"=([^&]*)(\\s|&|$)");
+      // console.log(reg);
+      // let result = window.location.search.substr(1).match(reg);
+      // console.log(result);
+      // return result ? decodeURIComponent(result[2]) : null;
+
+      var str = location.href; // 取得整个地址栏
+      var num = str.indexOf('?');
+      str = str.substr(num + 1); // 取得所有参数   stringvar.substr(start [, length ]
+
+      var arr = str.split('&'); // 各个参数放到数组里
+      // console.log(arr);
+      for (var i = 0; i < arr.length; i++) {
+        var result = arr[i].split('=');
+        if (result[0] === name) {
+          return decodeURI(result[1]);
+        }
+      }
     },
     loadDetail () {
       let goodsId = this.getUrlParam('goodsId');
@@ -125,19 +142,18 @@ export default {
         return;
       }
       let goodsInfo = {goodsId: goodsId};
-      this.$axios.post(
-        this.global.baseUrl + '/loadDetail',
-        goodsInfo
-      ).then((res) => {
+      this.$axios.post(this.global.baseUrl + '/loadDetail', goodsInfo).then((res) => {
         if (res.data.code === 200) {
-          alert(JSON.stringify(res.data.data));
+          // alert(JSON.stringify(res.data.data));
           this.product = res.data.data;
-          this.mainImage = this.product.image;
+          // this.mainImage = this.product.image;
           let subImages = this.product.subImages;
-          let array = subImages.split(',');
-          for (let i = 0; i < array.length; i++) {
-            this.subImages.push(array[i]);
-          }
+          this.subImage = subImages.split(',');
+          this.initSrc = this.subImage[0];
+          // alert(JSON.stringify(this.product));
+          // for (let i = 0; i < array.length; i++) {
+          //   this.subImages.push(array[i]);
+          // }
         // alert(this.subImages[2]);
         } else {
           this.isShowProduct = false;

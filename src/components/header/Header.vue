@@ -27,7 +27,7 @@
             </DropdownMenu>
           </Dropdown>
         </li>
-        <li>
+        <!-- <li>
           <Dropdown  placement="bottom-start">
             <a href="javascript:void(0)">
               <Icon type="ios-cart-outline"></Icon> 购物车
@@ -73,11 +73,12 @@
               </div>
             </DropdownMenu>
           </Dropdown>
-        </li>
+        </li> -->
+        <li><router-link to="/order"><Icon type="ios-cart-outline"></Icon>我的购物车</router-link></li>
         <li><router-link to="/">商城首页</router-link></li>
         <li><router-link to="/joinSupplier">供应商</router-link></li>
         <li><router-link to="/joinInvestor">投资者加盟</router-link></li>
-        <li><router-link to="/freeback">意见反馈</router-link></li>
+        <!-- <li><router-link to="/freeback">意见反馈</router-link></li> -->
       </ul>
     </div>
   </div>

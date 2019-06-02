@@ -26,14 +26,14 @@
         </Row>
       </div>
       <ul class="information">
-        <li class="info-list"><span>姓名：</span><i-input size="large" placeholder="请输入真实姓名"></i-input></li>
-        <li class="info-list"><span>邮箱：</span><i-input size="large" placeholder="请输入邮箱"></i-input></li>
-        <li class="info-list"><span>联系方式：</span><i-input size="large" placeholder="请输入联系电话"></i-input></li>
+        <li class="info-list"><span>姓名：</span><i-input v-model="investorData.name" size="large" placeholder="请输入真实姓名"></i-input></li>
+        <li class="info-list"><span>邮箱：</span><i-input v-model="investorData.email" size="large" placeholder="请输入邮箱"></i-input></li>
+        <li class="info-list"><span>联系方式：</span><i-input v-model="investorData.phone" size="large" placeholder="请输入联系电话"></i-input></li>
         <li class="info-list">
-          <span>投资意向：</span><i-input type="textarea" :rows="5" placeholder="请输入..."></i-input>
+          <span>投资意向：</span><i-input v-model="investorData.aim" type="textarea" :rows="5" placeholder="请输入..."></i-input>
         </li>
-        <li class="info-list"><span>投资金额(万)：</span><Input-number :value="2" size="large"></Input-number></li>
-        <li class="info-list list-submit"><i-button type="success" long>提交申请</i-button></li>
+        <li class="info-list"><span>投资金额(万)：</span><Input-number :value="1" v-model="investorData.money" size="large"></Input-number></li>
+        <li class="info-list list-submit"><i-button @click="investorSubmit()" type="success" long>提交申请</i-button></li>
       </ul>
     </div>
     <Footer></Footer>
@@ -47,7 +47,13 @@ export default {
   name: 'joinInvestor',
   data () {
     return {
-
+      investorData: {
+        name: '',
+        email: '',
+        phone: '',
+        aim: '',
+        money: ''
+      }
     };
   },
   components: {
@@ -55,7 +61,27 @@ export default {
     Footer
   },
   methods: {
-
+    investorSubmit () {
+      let investerInfo = {
+        investorName: this.investorData.name,
+        investorEmail: this.investorData.email,
+        investorPhone: this.investorData.phone,
+        investorAim: this.investorData.aim,
+        investorMoney: this.investorData.money
+      };
+      this.$axios.post(this.global.baseUrl + '/InsertInvetor', investerInfo).then((res) => {
+        if (res.data.code === 200) {
+          // 跳向注册成功界面
+          // self.loadPage('result', {'type': 'user-register'});
+          // this.$Message.success('注册成功');
+          this.$router.push({ path: '/applyDone' });
+        } else {
+          alert(res.data.msg);
+        }
+      }).catch(function (res) {
+        alert('系统内部异常，请联系管理员');
+      });
+    }
   }
 };
 </script>

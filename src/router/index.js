@@ -6,6 +6,7 @@ const SignUp = resolve => require(['@/components/SignUp'], resolve);
 const CheckPhone = resolve => require(['@/components/signUp/CheckPhone'], resolve);
 const InputInfo = resolve => require(['@/components/signUp/InputInfo'], resolve);
 const SignUpDone = resolve => require(['@/components/signUp/SignUpDone'], resolve);
+const ApplyDone = resolve => require(['@/components/ApplyDone'], resolve);
 const GoodsList = resolve => require(['@/components/GoodsList'], resolve);
 const GoodsDetail = resolve => require(['@/components/GoodsDetail'], resolve);
 const ShoppingCart = resolve => require(['@/components/ShoppingCart'], resolve);
@@ -35,6 +36,11 @@ export default new Router({
       path: '/joinSupplier', // 供应商
       name: 'joinSupplier',
       component: JoinSupplier
+    },
+    {
+      path: '/applyDone',
+      name: 'ApplyDone',
+      component: ApplyDone
     },
     {
       path: '/joinInvestor', // 投资商
@@ -86,12 +92,18 @@ export default new Router({
     {
       path: '/shoppingCart', // 商品详情
       name: 'ShoppingCart',
-      component: ShoppingCart
+      component: ShoppingCart,
+      meta: {
+        requestAuth: true
+      }
     },
     {
       path: '/order', // 订单页面
       name: 'Order',
-      component: Order
+      component: Order,
+      meta: {
+        requestAuth: true
+      }
     },
     {
       path: '/pay', // 支付页面

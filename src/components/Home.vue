@@ -3,12 +3,12 @@
     <Layout class="layout">
       <Sider class="side-bar" :style="{height: 'calc(100vh - 35px)', background: '#fff', overflow: 'auto'}" ref="side" :collapsed-width="78">
         <Menu active-name="1-2" theme="light" width="auto" @on-select="onSelect">
-          <div class="user-icon">
+          <!-- <div class="user-icon">
             <div class="user-img">
               <img src="static/img/head.png">
             </div>
             <p>Gavin</p>
-          </div>
+          </div> -->
           <Submenu name="1">
             <template slot="title">
                 <Icon type="location"></Icon>
@@ -24,13 +24,13 @@
             </template>
             <MenuItem name="myOrder">我的订单</MenuItem>
           </Submenu>
-          <Submenu name="3">
+          <!-- <Submenu name="3">
             <template slot="title">
                 <Icon type="ios-cart"></Icon>
                 <span>购物车</span>
             </template>
             <MenuItem name="myShoppingCart">我的购物车</MenuItem>
-          </Submenu>
+          </Submenu> -->
         </Menu>
       </Sider>
       <Layout class="layout">
@@ -42,7 +42,7 @@
             <router-view></router-view>
           </transition>
         </Content>
-        <Footer class="layout-footer-center">2018 &copy; Gavin</Footer>
+        <Footer class="layout-footer-center">2019 &copy; Judy</Footer>
       </Layout>
     </Layout>
   </div>
@@ -104,5 +104,8 @@ export default {
   padding: 0px 15px;
   padding-bottom: 15px;
   text-align: center;
+}
+.ivu-menu-light {
+  padding-top: 30px;
 }
 </style>
