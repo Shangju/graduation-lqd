@@ -9,11 +9,6 @@
         <template slot="desc">请点击商品前的选择框，选择购物车中的商品，点击付款即可。</template>
       </Alert>
       <Table border ref="selection" :columns="columns" :data="shoppingCart" size="large" @on-selection-change="select" no-data-text="您的购物车没有商品，请先添加商品到购物车再点击购买"></Table>
-      <!-- <template slot-scope="{}" slot="quantity">
-        <FormItem prop="quantity" >
-          <InputNumber size="small" ></InputNumber>
-        </FormItem>
-	    </template> -->
       <div class="address-container">
         <h3>收货人信息</h3>
         <div class="address-box">
@@ -31,7 +26,7 @@
                 <p slot="content">
                   <RadioGroup vertical size="large" @on-change="changeAddress">
                     <Radio :label="item.addressId" v-for="(item, index) in addressData" :key="index">
-                      <span>{{item.userAddress}} {{item.cityName}} {{item.areaName}} {{item.userPhone}}</span>
+                      <span props="userAddress">{{item.userAddress}} {{item.cityName}} {{item.areaName}}</span>
                     </Radio>
                   </RadioGroup>
                 </p>
@@ -61,7 +56,6 @@ import Sreach from '@/components/Sreach';
 import Footer from '@/components/footer/Footer';
 import { getAddress } from '../api.js';
 import store from '@/vuex/store';
-// import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Order',
   beforeRouteEnter (to, from, next) {
@@ -115,28 +109,23 @@ export default {
         {
           title: '数量',
           key: 'quantity',
-          slot:"quantity",
           width: 120,
-          align: 'center',
+          align: 'center'
           // render: (h, params) => {
-          //   // let quantity = params.row.quantity;
           //   return h('div', [
           //     h('InputNumber', {
           //       on: {
           //         'on-change': (event) => {
           //           // alert(event); // event表示数字输入框的数字
-          //           this.quantity = event
-          //           console.log(params.row.quantity)
+          //           this.quantity = event;
+          //           console.log(params.row.quantity);
           //         }
           //       },
           //       props: {
           //         min: 0,
           //         value: params.row.quantity
           //         // disabled: true
-          //       },
-          //       domProps:{
-			    //         value:this.price
-			    //       },
+          //       }
           //     })
           //   ]);
           // }
@@ -206,24 +195,20 @@ export default {
     }
   },
   methods: {
-    addOrder () {
-      this.$router.push('/pay');
-      // let userOrder = {
-      //   userId: '123'
-      //   // orderId:
-      // };
-      // this.$axios.post(
-      //   this.global.baseUrl + '/addOrder',
-      //   userOrder
-      // ).then((res) => {
-      //   if (res.data.code === 200) {
-      //     this.$router.push('/Pay');
-      //   } else {
-      //     alert(res.data.msg);
-      //   }
-      // }).catch(function (res) {
-      //   alert(res);
-      // });
+    addOrder () { //支付订单按钮 向后台发送订单数据
+    // console.log(this.shoppingCart);
+      this.$axios.post(
+        this.global.baseUrl + '/addOrder',
+        this.shoppingCart
+      ).then((res) => {
+        if (res.data.code === 200) {
+          this.$router.push('/Pay');
+        } else {
+          alert(res.data.msg);
+        }
+      }).catch(function (res) {
+        alert(res);
+      });
     },
     loadAddress () { // 加载收货地址信息
       let params = {
@@ -253,8 +238,9 @@ export default {
         this.global.baseUrl + '/cart/getCartInfo'
       ).then((res) => {
         if (res.data.code === 200) {
-          console.log(JSON.stringify(res.data));
+          // console.log(JSON.stringify(res.data));
           this.shoppingCart = res.data.data;
+          // console.log(this.shoppingCart);
           // this.cartList = res.data.data;
           // for (let i = 0; i < this.cartList.length; i++) {
           //   this.totalNum = this.totalNum + this.cartList[i].quantity;

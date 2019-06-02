@@ -13,3 +13,6 @@ export const getAddress = (params) => { return axios.post(`${base}` + 'getAddres
 
 // 删除我的购物车中的商品
 export const delGoods = (params) => { return axios.post(`${base}` + 'deleteGoods', params).then(res => res.data); };
+
+// 获取我的订单
+export const getOrders = (params) => { return axios.post(`${base}` + 'getOrders', params).then(res => res.data); };
